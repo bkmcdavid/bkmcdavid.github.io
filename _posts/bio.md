@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Introducing Hyde
+title: Brennan McDavid
 ---
 
 I work in ancient philosophy, especially metaethics, epistemology, and political economy in Plato and Aristotle. 
