@@ -1,4 +1,4 @@
-x# Dependencies
+# Dependencies
 markdown:         redcarpet
 highlighter:      pygments
 
