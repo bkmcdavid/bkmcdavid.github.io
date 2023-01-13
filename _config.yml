@@ -11,7 +11,7 @@ title:            Brennan McDavid
 tagline:          'A Jekyll theme'
 description:      ''
 url:              https://bkmcdavid.github.io
-baseurl:          https://bkmcdavid.github.io
+baseurl:          /
 
 author:
   name:           'Brennan McDavid'
