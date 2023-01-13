@@ -32,7 +32,7 @@
  */
 
 html {
-  font-family: "Open Sans", sans-serif; "Merriweather", serif
+  font-family: "Merriweather", serif; "Open Sans", sans-serif;
 }
 @media (min-width: 48em) {
   html {
