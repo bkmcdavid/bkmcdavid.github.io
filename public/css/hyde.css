@@ -97,7 +97,7 @@ a.sidebar-nav-item:focus {
 }
 .sidebar-nav-item.active {
   font-weight: bold;
-  text-decoration: italic
+  font-style: italic
 }
 
 /* Sticky sidebar
