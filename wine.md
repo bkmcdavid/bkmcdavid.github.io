@@ -28,7 +28,7 @@ Places I've visited:
   <li>Temecula (California)</li>
   <li>Finger Lakes (New York)</li>
 
-
+<br>
 The bucket list:
 
   <li>Burgundy</li>
