@@ -18,7 +18,8 @@ Places I've visited:
   <li>Mornington Peninsula (Australia)</li> 
   <li>Yarra Valley (Australia) </li>
   <li>Adelaide Hills (Australia) </li>
-  <li>Clare and Eden Valleys (Australia)</li> 
+  <li>Clare and Eden Valleys (Australia)</li>
+  <li>Barossa Valley (Australia)</li>
   <li>Tasmania (Australia)</li>
   <li>Colchagua Valley (Chile)</li>
   <li>San Antonio Valley (Chile)</li>
