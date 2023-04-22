@@ -11,7 +11,7 @@ title: Research
   
 "Peer Disagreement in Aristotle's Ethical Epistemology" utilizes modern concepts in epistemology to explore the correspondence in knowledge between peer moral experts, conceived as Aristotle conceives of <i>phronesis</i>.
 
-"Aristotle on the Possibility of Artifical Intelligence" is a project in knowledge representation. I draw on Aristotle's concept of <i>nous</i> as a "capable of receiving forms"</i> (<i>De Anima</i> 3.4) for approaching the question of AI's possibility and, in turn, utilize notions in modern technology for scrutinizing Aristotle. 
+"Aristotle on the Possibility of Artifical Intelligence" is a project in knowledge representation. I draw on Aristotle's concept of <i>nous</i> as a thing "capable of receiving forms" (<i>De Anima</i> 3.4) for approaching the question of AI's possibility and, in turn, utilize notions in modern technology for scrutinizing Aristotle. 
 
 
 ## Recent Publications
