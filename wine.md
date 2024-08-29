@@ -11,7 +11,7 @@ What I mean to say is that my love of ancient philosophical ideas seems to have 
 
 It happened in Australia when I became the president of my college's Senior Common Room and gained access to its storied cellar. Treasures heaping, and I was like an illiterate barbarian looking in the window. So I took a couple of wine courses, visited some wine spots, and even got dirty and tired doing harvest tasks. 
 
-I can't stop. The wine bug bit me and I think I'm in it for life. I hold a WSET Level 3 certificate, and I am set to start my Diploma study this year.
+I can't stop. The wine bug bit me and I think I'm in it for life. I am currently studying for my WSET Diploma under <a href="https://www.neptunewine.com/peter-neptune">Peter Neptune MS</a>.
 
 Places I've visited:
 
