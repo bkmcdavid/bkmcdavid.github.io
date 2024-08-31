@@ -8,6 +8,7 @@ My favorite classes to teach are those in which I learn.
 At Chapman, I run two philosophy courses:
 
 <a href="https://bkmcdavid.github.io/pdfs/Syllabus2022F.docx.pdf">"From Socrates to Aquinas"</a> (every semester)
+
 <a href="https://bkmcdavid.github.io/pdfs/Phil360syllabus.pdf">"Bootcamp in Aristotle"</a> (every other Fall)
 
 
