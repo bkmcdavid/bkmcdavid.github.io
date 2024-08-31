@@ -5,7 +5,7 @@ title: Wine
 
 "Don't wine-lovers love every kind of wine and find any excuse to enjoy it?"
 
-So says Socrates in Plato's <i>Republic</i>.
+So says Socrates in <a href="https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0168%3Abook%3D5%3Apage%3D475">Plato's <i>Republic</i></a>.
 
 What I mean to say is that my love of ancient philosophical ideas seems to have been waiting for the day I would fall in love with wine.
 
@@ -35,4 +35,3 @@ The bucket list:
 &nbsp;&nbsp;&nbsp;&nbsp;Champagne<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Piedmont<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Etna <br>
-  <li>Etna</li>
