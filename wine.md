@@ -15,24 +15,24 @@ I can't stop. The wine bug bit me and I think I'm in it for life. I am currently
 
 Places I've visited:
 
-  <li>Mornington Peninsula (Australia)</li> 
-  <li>Yarra Valley (Australia) </li>
-  <li>Adelaide Hills (Australia) </li>
-  <li>Clare and Eden Valleys (Australia)</li>
-  <li>Barossa Valley (Australia)</li>
-  <li>Tasmania (Australia)</li>
-  <li>Colchagua Valley (Chile)</li>
-  <li>San Antonio Valley (Chile)</li>
-  <li>Tuscany (Italy)</li>
-  <li>Santa Barbara (California)</li>
-  <li>Paso Robles (California)</li>
-  <li>Temecula (California)</li>
-  <li>Finger Lakes (New York)</li>
+&nbsp;&nbsp;&nbsp;&nbsp;Mornington Peninsula (Australia) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;Yarra Valley (Australia) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;Adelaide Hills (Australia) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;Clare and Eden Valleys (Australia)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Barossa Valley (Australia)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Tasmania (Australia)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Colchagua Valley (Chile)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;San Antonio Valley (Chile)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Tuscany (Italy)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Santa Barbara (California)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Paso Robles (California)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Temecula (California)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Finger Lakes (New York)<br>
 
-<br>
 The bucket list:
 
-  <li>Burgundy</li>
-  <li>Champagne</li>
-  <li>Piedmont</li>
+&nbsp;&nbsp;&nbsp;&nbsp;Burgundy<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Champagne<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Piedmont<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Etna <br>
   <li>Etna</li>
