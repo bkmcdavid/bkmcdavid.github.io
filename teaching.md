@@ -5,10 +5,20 @@ title: Teaching
 
 My favorite classes to teach are those in which I learn.
 
-At Chapman, I'm lucky to run our ancient philosophy courses. Every semester I teach a course called "From Socrates to Aquinas" (<a href="https://bkmcdavid.github.io/pdfs/Syllabus2022F.docx.pdf">link to syllabus</a>). In Fall 2023, I will teach the first iteration of my new course "Bootcamp in Aristotle" (<a href="https://bkmcdavid.github.io/pdfs/Phil360syllabus.pdf">link to syllabus</a>).
+At Chapman, I run two philosophy courses:
 
-I'm doubly lucky to teach also in the Humanomics courses offered by the Smith Institute at Chapman. These are co-taught, interdisciplinary courses covering economics, literature, and philosophy. I taught "Trust in Troubling Times" with Jan Osborn, professor in english; "Shame: The Civilizing Emotion" with Erin Crockett, professor in economics; and "What is Progress?" with Erik Kimbrough, professor in economics.
+<a href="https://bkmcdavid.github.io/pdfs/Syllabus2022F.docx.pdf">"From Socrates to Aquinas"</a> (every semester)
+<a href="https://bkmcdavid.github.io/pdfs/Phil360syllabus.pdf">"Bootcamp in Aristotle"</a> (every other Fall)
 
-I believe in <i>showing</i> how to learn rather than telling, so I learn with my students and incorporate new-to-me readings deliberately and often.
 
-Learning should be lifelong and fun.
+I also teach courses in the <a href="https://www.chapman.edu/research/institutes-and-centers/smith-institute-for-political-economy-and-philosophy/academics-and-research/humanomics.aspx">Humanomics program</a> offered by the <a href="https://www.chapman.edu/research/institutes-and-centers/smith-institute-for-political-economy-and-philosophy/index.aspx">Smith Institute</a> at Chapman. These are co-taught, interdisciplinary courses covering economics, literature, and philosophy. My Humanomics courses include:
+
+<a href="https://github.com/bkmcdavid/bkmcdavid.github.io/blob/ce745dd1dd6f86862bb5390fe12f738662421509/pdfs/357syllabus.Updated.05.04.20.pdf">"Trust in Troubling Times"</a> with Jan Osborn, professor in english
+<a href="https://github.com/bkmcdavid/bkmcdavid.github.io/blob/ce745dd1dd6f86862bb5390fe12f738662421509/pdfs/357syllabusShame.docx">"Shame: The Civilizing Emotion"</a> with Erin Crockett, professor in economics
+<a href="https://github.com/bkmcdavid/bkmcdavid.github.io/blob/ce745dd1dd6f86862bb5390fe12f738662421509/pdfs/2023HumanomicsProgress.docx">"What is Progress?"</a> with Erik Kimbrough, professor in economics, and Dillon Tauzin, professor in economics
+
+
+<a href="https://github.com/bkmcdavid/bkmcdavid.github.io/blob/b70a45c5b6db5f286252fa06720ca044eeb39912/pdfs/DangerousIdeasFall2024.pdf">"Dangerous Ideas"</a> is my newest course. It is a foray into tackling the problem of the erosion of civil discourse. Erik Kimbrough (economist) and I have developed a class that aims to equip students with skills in argument analysis and evidence evaluation. The course has been awarded Chapman's Pedagogical Innovation Grant. 
+
+
+Learning should be lifelong and fun. I do it all the time and so should you.
