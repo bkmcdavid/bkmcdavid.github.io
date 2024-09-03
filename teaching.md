@@ -14,14 +14,14 @@ At Chapman, I run two philosophy courses:
 
 I also teach courses in the <a href="https://www.chapman.edu/research/institutes-and-centers/smith-institute-for-political-economy-and-philosophy/academics-and-research/humanomics.aspx">Humanomics program</a> offered by the <a href="https://www.chapman.edu/research/institutes-and-centers/smith-institute-for-political-economy-and-philosophy/index.aspx">Smith Institute</a> at Chapman. These are co-taught, interdisciplinary courses covering economics, literature, and philosophy. My Humanomics courses include:
 
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/bkmcdavid/bkmcdavid.github.io/blob/ce745dd1dd6f86862bb5390fe12f738662421509/pdfs/357syllabus.Updated.05.04.20.pdf">"Trust in Troubling Times"</a> with Jan Osborn, professor in english
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://bkmcdavid.github.io/pdfs/357syllabus.Updated.05.04.20.pdf">"Trust in Troubling Times"</a> with Jan Osborn, professor in english
 
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/bkmcdavid/bkmcdavid.github.io/blob/ce745dd1dd6f86862bb5390fe12f738662421509/pdfs/357syllabusShame.docx">"Shame: The Civilizing Emotion"</a> with Erin Crockett, professor in economics
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://bkmcdavid.github.io/pdfs/357syllabusShame.docx">"Shame: The Civilizing Emotion"</a> with Erin Crockett, professor in economics
 
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/bkmcdavid/bkmcdavid.github.io/blob/ce745dd1dd6f86862bb5390fe12f738662421509/pdfs/2023HumanomicsProgress.docx">"What is Progress?"</a> with <a href="https://sites.google.com/site/erikkimbrough/">Erik Kimbrough</a>, professor in economics, and Dillon Tauzin, professor in economics
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://bkmcdavid.github.io/pdfs/2023HumanomicsProgress.docx">"What is Progress?"</a> with <a href="https://sites.google.com/site/erikkimbrough/">Erik Kimbrough</a>, professor in economics, and Dillon Tauzin, professor in economics
 
 
-<a href="https://github.com/bkmcdavid/bkmcdavid.github.io/blob/b70a45c5b6db5f286252fa06720ca044eeb39912/pdfs/DangerousIdeasFall2024.pdf">"Dangerous Ideas"</a> is my newest course, co-taught with Erik Kimbrough. It is a foray into tackling the problem of the erosion of civil discourse by equiping students with skills in argument analysis and evidence evaluation. The course has been awarded Chapman's Pedagogical Innovation Grant. 
+<a href="hhttps://bkmcdavid.github.io/pdfs/DangerousIdeasFall2024.pdf">"Dangerous Ideas"</a> is my newest course, co-taught with Erik Kimbrough. It is a foray into tackling the problem of the erosion of civil discourse by equiping students with skills in argument analysis and evidence evaluation. The course has been awarded Chapman's Pedagogical Innovation Grant. 
 
 
 Learning should be lifelong and fun. I do it all the time and so should you.
