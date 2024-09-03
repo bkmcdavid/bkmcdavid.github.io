@@ -7,7 +7,7 @@ title: Research
 
 ## Papers
 
-<a href="https://bkmcdavid.github.io/pdfs/Prison-Breaking from the CaveCQ.docx">"Prison-Breaking from the Cave"</a> <i>Classical Quarterly</i> (forthcoming). <br/>
+<a href="https://bkmcdavid.github.io/pdfs/Prison-BreakingCQ.pdf">"Prison-Breaking from the Cave"</a> <i>Classical Quarterly</i> (forthcoming). <br/>
 Abstract: This paper examines the philosophical significance of nature (‘φύσις’) in Plato’s Allegory of the Cave. The word is used in the protasis of the conditional clause at 515b-c where Socrates proposes to inquire into “what would be the manner of the release and healing from these bonds and this folly if in the course of nature (φύσει) something of this sort should happen to them.” This instance of “nature” has been a matter of philological and philosophical debate, with attention paid principally to the narrow passage of the Allegory for reconstructing Plato’s meaning. This paper wages an argument from the standpoint of the argument of the dialogue as a whole, showing that a particular reading of ‘φύσις’ in the passage coheres with the conception of human nature in the <i>Republic</i>’s moral psychology. 
 
 <a href="https://bkmcdavid.github.io/pdfs/APfinal.pdf">"Φύσιs in Plato’s <i>Republic</i>"</a> <i>Ancient Philosophy</i> 44 (2): 1-16 (2024). <br/>
