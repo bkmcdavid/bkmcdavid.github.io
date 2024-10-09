@@ -8,14 +8,17 @@ My favorite classes to teach are those in which I learn.
 Philosophy courses:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.brennanmcdavid.com/pdfs/Syllabus2022F.docx.pdf">"From Socrates to Aquinas"</a> (every semester)
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.brennanmcdavid.com/pdfs/Phil360syllabus.pdf">"Bootcamp in Aristotle"</a> (every other Fall)
 
 
 <a href="https://www.chapman.edu/research/institutes-and-centers/smith-institute-for-political-economy-and-philosophy/academics-and-research/humanomics.aspx">Humanomics</a> courses: 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.brennanmcdavid.com/pdfs/357syllabus.Updated.05.04.20.pdf">"Trust in Troubling Times"</a> with Jan Osborn, professor in english
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.brennanmcdavid.com/pdfs/357syllabusShame.pdf">"Shame: The Civilizing Emotion"</a> with Erin Crockett, professor in economics
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.brennanmcdavid.com/pdfs/2023HumanomicsProgress.pdf">"What is Progress?"</a> with <a href="https://sites.google.com/site/erikkimbrough/">Erik Kimbrough</a>, professor in economics, and Dillon Tauzin, professor in economics
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Li><a href="https://www.brennanmcdavid.com/pdfs/357syllabus.Updated.05.04.20.pdf">"Trust in Troubling Times"</a> with Jan Osborn, professor in english
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Li><a href="https://www.brennanmcdavid.com/pdfs/357syllabusShame.pdf">"Shame: The Civilizing Emotion"</a> with Erin Crockett, professor in economics
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Li><a href="https://www.brennanmcdavid.com/pdfs/2023HumanomicsProgress.pdf">"What is Progress?"</a> with <a href="https://sites.google.com/site/erikkimbrough/">Erik Kimbrough</a>, professor in economics, and Dillon Tauzin, professor in economics</Li>
 
 New Freshman Seminar: 
 
