@@ -22,14 +22,101 @@
       </div>
     </nav>
     <main>
-      <div class="homepage-container">
-        <div class="bio">
-          <p>
-            Stuff about research will go here
-          </p>
+      <div class="research-areas-container">
+        <!-- Ancient Political Economy -->
+        <div class="research-box">
+          <div class="research-image" style="background-image: url('/img/atheniancoins.jpg');">
+            <div class="research-title">Ancient Political Economy</div>
+          </div>
+          <div class="research-desc">
+            <span>
+              Exploring the economic institutions, trade, and resource management of ancient societies, focusing on how political structures shaped and were shaped by economic life.
+            </span>
+            <a href="#" class="read-more" onclick="toggleDesc(event, this)">Read more</a>
+            <span class="more-text" style="display: none;">
+              <br>
+              My work draws on interdisciplinary methods—from textual analysis of primary sources to comparative studies—to illuminate how ancient economies functioned at both local and imperial levels. This research also considers the relevance of ancient thought for contemporary debates in political economy.
+            </span>
+          </div>
         </div>
+
+        <!-- Plato's Theory of Human Nature -->
+        <div class="research-box">
+          <div class="research-image" style="background-image: url('/img/Heliogabalus.jpg');">
+            <div class="research-title">Plato's Theory of Human Nature</div>
+          </div>
+          <div class="research-desc">
+            <span>
+              The education that Plato describes in the <i>Republic</i> is a story of nurture. My research in this area explores how Plato conceives of nurture as complementing inborn nature.
+            </span>
+            <a href="#" class="read-more" onclick="toggleDesc(event, this)">Read more</a>
+            <span class="more-text" style="display: none;">
+              <br>
+              My studies of Plato's conception of human nature begin from the premise, set out at 581c in the <i>Republic</i>, that there are "three primary kinds of people." This principle of Plato's moral psychology has implications for every dimension of the dialogue. Several of my papers explore these distinct dimensions:
+              <ul style="margin-top:0.5em;">
+                <li>
+                  <a href="/pdfs/Prison-BreakingCQ.pdf" target="_blank">“Prison-Breaking from Plato’s Cave.”</a> In: <i>Classical Quarterly</i> (Forthcoming).
+                </li>
+                <li>
+                  <a href="/pdfs/PsychofMoneyRevised.pdf" target="_blank">"The Psychology of Money in Plato’s Republic.”</a> In: <i>History of Political Economy</i> (Forthcoming)
+                </li>
+                <li>
+                  <a href="/pdfs/APfinal.pdf" target="_blank">“Φύσιs in Plato’s Republic.”</a> In: <i>Ancient Philosophy</i> 44 (2024), pp. 1–16
+                </li>
+              </ul>
+            </span>
+          </div>
+        </div>
+
+        <!-- Adam Smith's Eudaimonism -->
+        <div class="research-box">
+          <div class="research-image" style="background-image: url('/img/pissaro.jpg');">
+            <div class="research-title">Adam Smith's Eudaimonism</div>
+          </div>
+          <div class="research-desc">
+            <span>
+              Unpacking how Adam Smith’s ethics, economics, and aesthetics contribute to a philosophical framework for human flourishing—a modern ‘eudaimonism’.
+            </span>
+            <a href="#" class="read-more" onclick="toggleDesc(event, this)">Read more</a>
+            <span class="more-text" style="display: none;">
+              <br>
+              By tracing Smith’s engagement with ancient philosophy and his conceptions of sympathy, virtue, and the impartial spectator, I develop new interpretations of Smith’s relevance for current debates in moral philosophy and political theory.
+            </span>
+          </div>
+        </div>
+
+        <!-- Trust in AI -->
+        <div class="research-box">
+          <div class="research-image" style="background-image: url('/img/trustinai.jpg');">
+            <div class="research-title">Trust in AI</div>
+          </div>
+          <div class="research-desc">
+            <span>
+              Examining the philosophical, ethical, and social conditions under which it is rational or justifiable to trust artificial intelligence systems.
+            </span>
+            <a href="#" class="read-more" onclick="toggleDesc(event, this)">Read more</a>
+            <span class="more-text" style="display: none;">
+              <br>
+              I address questions about explainability, moral agency, and the boundaries of human-machine collaboration, drawing on classical theories of trust and contemporary examples. My aim is to clarify the stakes of trust in an increasingly automated society.
+            </span>
+          </div>
+        </div>
+      </div>
       </div>
     </main>
   </div>
+  <script>
+    function toggleDesc(e, elem) {
+      e.preventDefault();
+      var moreText = elem.nextElementSibling;
+      if (moreText.style.display === 'none' || moreText.style.display === '') {
+        moreText.style.display = 'inline';
+        elem.textContent = 'Read less';
+      } else {
+        moreText.style.display = 'none';
+        elem.textContent = 'Read more';
+      }
+    }
+  </script>
 </body>
-</html
+</html>
