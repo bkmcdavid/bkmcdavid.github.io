@@ -89,7 +89,7 @@ main {
 }
 
 .profile-pic {
-  margin-top: 2em;
+  margin-top: 1em;
   width: 300px;
   height: auto;
   object-fit: cover;
@@ -172,7 +172,21 @@ main {
   font-size: 0.97em;
 }
 
-  
+.abstract-toggle {
+  color: #327abd;
+  font-size: 0.95em;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-bottom: 0.1em;
+  display: inline-block;
+}
+.paper-abstract {
+  display: none;
+  margin-left: 0;
+  font-style: italic;
+  color: #444;
+}  
+
 
 /* Responsive: On small screens, sidebar becomes topbar */
 @media (max-width: 900px) {
