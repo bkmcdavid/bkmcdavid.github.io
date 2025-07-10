@@ -15,7 +15,7 @@ html, body {
 
 /* SIDEBAR */
 .sidebar-nav {
-  width: 650px;
+  width: 220px;
   background: #f6f7fa;
   padding: 0;
   display: flex;
@@ -99,45 +99,53 @@ html, body {
 /* Responsive: On small screens, sidebar becomes topbar */
 @media (max-width: 900px) {
   .container {
-    flex-direction: column;
+    display: block;
+    min-height: auto;
   }
   .sidebar-nav {
     width: 100%;
     min-height: auto;
-    border-right: none;
-    border-bottom: 1.5px solid #e5e5ea;
     background: #f6f7fa;
+    border: none;
     position: static;
     display: block;
   }
   .sidebar-content {
-    height: auto;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding: 1.2em 0.9em 1.2em 0.9em;
-    display: flex;
-    gap: 0.7em;
+    height: auto;
+    padding: 2em 1em 1em 1em;
+    gap: 1em;
+    box-shadow: none;
   }
   .sidebar-name {
-    font-size: 1.5rem;
-    margin: 0 0 0.7em 0;
+    font-size: 1.3rem;
+    text-align: center;
+    margin: 0;
+    padding-bottom: 0.5em;
     display: block;
-    align-items: center;
-    justify-content: center;
+    /* No flex here */
   }
   .sidebar-links {
     flex-direction: column;
-    gap: 1em;
+    gap: 0.7em;
     margin-bottom: 0;
-    font-size: 1.07em;
     width: 100%;
     align-items: center;
+    font-size: 1em;
   }
   .sidebar-links a {
     display: block;
     width: 100%;
-    box-sizing: border-box;
     text-align: center;
+  }
+  main {
+    margin: 0; /* Remove any large left/right margin from desktop */
+    padding: 2em 0.5em 0 0.5em;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }
