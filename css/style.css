@@ -1,0 +1,129 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  background: #fafcff;
+  color: #222;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar-nav {
+  width: 260px;
+  background: #f6f7fa;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  border-right: 1.5px solid #e5e5ea;
+  min-height: 100vh;
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+  position: relative;
+}
+
+.sidebar-spacer {
+  flex: 1 1 0;
+}
+
+.sidebar-name {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-align: center;
+  margin-bottom: 1.2em;
+  margin-top: 0.3em;
+}
+
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1em;
+  font-size: 1.13em;
+  font-weight: 500;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.sidebar-links a {
+  color: #223;
+  text-decoration: none;
+  transition: color 0.17s;
+  padding: 0.3em 0.7em;
+  border-radius: 4px;
+}
+
+.sidebar-links a:hover,
+.sidebar-links a:focus {
+  color: #2563eb;
+  background: #dbeafe;
+}
+
+.sidebar-content {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.sidebar-spacer {
+  flex: 1;
+}
+
+.sidebar-name {
+  /* Centered vertically at about halfway */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  margin-bottom: auto;
+  margin-top: auto;
+  min-height: 20vh;
+}
+
+.sidebar-links {
+  /* Stick the links to the bottom of the sidebar */
+  margin-bottom: 3.5em;
+}
+
+@media (max-width: 700px) {
+  .container {
+    flex-direction: column;
+  }
+  .sidebar-nav {
+    width: 100%;
+    min-height: auto;
+    border-right: none;
+    border-bottom: 1.5px solid #e5e5ea;
+  }
+  .sidebar-content {
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7em 1.5em;
+  }
+  .sidebar-name {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+  .sidebar-links {
+    flex-direction: row;
+    gap: 1em;
+    margin-bottom: 0;
+    font-size: 1em;
+  }
+  .sidebar-spacer {
+    display: none;
+  }
+}
