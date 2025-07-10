@@ -158,13 +158,22 @@ main {
   position: relative;
 }
 
+.research-desc,
+.research-desc span,
+.research-desc ul,
+.paper-abstract {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 400;
+}
+
 .read-more {
-  display: inline-block;
+  display: block;
   margin-top: 0.75em;
   color: #244ac5;
   text-decoration: underline;
   font-size: 0.96em;
   cursor: pointer;
+  font-weight: 400;
 }
 
 .more-text {
@@ -186,6 +195,17 @@ main {
   font-style: italic;
   color: #444;
 }  
+
+.research-areas-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.research-box {
+  width: 100%;
+}
 
 
 /* Responsive: On small screens, sidebar becomes topbar */
