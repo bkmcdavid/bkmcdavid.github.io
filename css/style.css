@@ -13,9 +13,22 @@ html, body {
   min-height: 100vh;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* horizontally center contents */
+  justify-content: center; /* optionally, to vertically center if desired */
+  flex: 1;
+}
+
+.bio {
+  text-align: centert;
+  width: 100%;
+}
+
 /* SIDEBAR */
 .sidebar-nav {
-  width: 220px;
+  width: 280px;
   background: #f6f7fa;
   padding: 0;
   display: flex;
