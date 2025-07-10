@@ -112,9 +112,10 @@ main {
 /* Responsive: On small screens, sidebar becomes topbar */
 @media (max-width: 900px) {
   .container {
-    display: block;
-    min-height: auto;
+    display: block !important;   /* Remove flex container */
+    min-height: unset;
   }
+  
   .sidebar-nav {
     width: 100%;
     min-height: auto;
