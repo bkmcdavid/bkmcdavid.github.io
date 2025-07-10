@@ -76,13 +76,24 @@ html, body {
 }
 
 .profile-pic {
+  margin-top: 2em;
   width: 220px;
   height: 300px;
   object-fit: cover;
   /* border-radius: 50%; */
   box-shadow: 0 1px 6px rgba(0,0,0,0.15);
   display: block;
-  margin: 0 auto 1.5em auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.5em;
+}
+
+.homepage-container {
+  max-width: 440px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 2em 1em 0 1em;
+  box-sizing: border-box;
 }
 
 /* Responsive: On small screens, sidebar becomes topbar */
