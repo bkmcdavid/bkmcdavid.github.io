@@ -1,0 +1,30 @@
+---
+layout: page
+title: Research
+---
+
+
+
+## Papers
+
+<a href="https://bkmcdavid.github.io/pdfs/Prison-BreakingCQ.pdf">"Prison-Breaking from Plato's Cave"</a> <i>Classical Quarterly</i> (forthcoming). <br/>
+Abstract: This paper examines the philosophical significance of nature (‘φύσις’) in Plato’s Allegory of the Cave. The word is used in the protasis of the conditional clause at 515b-c where Socrates proposes to inquire into “what would be the manner of the release and healing from these bonds and this folly if in the course of nature (φύσει) something of this sort should happen to them.” This instance of “nature” has been a matter of philological and philosophical debate, with attention paid principally to the narrow passage of the Allegory for reconstructing Plato’s meaning. This paper wages an argument from the standpoint of the argument of the dialogue as a whole, showing that a particular reading of ‘φύσις’ in the passage coheres with the conception of human nature in the <i>Republic</i>’s moral psychology. 
+
+<a href="https://bkmcdavid.github.io/pdfs/APfinal.pdf">"Φύσιs in Plato’s <i>Republic</i>"</a> <i>Ancient Philosophy</i> 44 (2): 1-16 (2024). <br/>
+Abstract: I examine the role of nature (φύσιs) in the argument of Plato’s <i>Republic</i> and demonstrate that the concept plays a more central role in advancing the dialogue’s philosophical aims than has been appreciated by scholars. Socrates carefully distinguishes between the nature with which one is born and the nature that one has at the end of education. The former is one’s “original nature,” and the latter is that same original nature brought to fulfillment, a “fulfilled nature”. Both of these are referred to as φύσιs. Distinguishing them aids us in understanding the argument of the dialogue. 
+
+<a href="https://bkmcdavid.github.io/pdfs/CreativeRoleofImagination.pdf">"Adam Smith and the Creative Role of Imagination"</a> with <a href="https://www.keithhankins.com/">Keith Hankins</a> in Alberto Burgio (ed.) <i>Adam Smith and Modernity: 1723 - 2023</i>, Routledge: 109 – 127 (2023). <br/>
+Abstract: Scholars interested in Adam Smith’s account of imagination have distinguished between “sympathetic” or “practical” imagination, on one hand, and “nonsympathetic” or “theoretical” imagination on the other. The former is exercised in the moral and social domains of life, where we “chang[e] places in fancy” with fellow human beings and, thereby, acquire moral understanding of them and deepen our understanding of ourselves. Theoretical imagination, in contrast, is exercised in relation to objects and natural phenomena and, so, involves no imaginary changing of places, but a search for harmony and orderliness among observed phenomena. A third, overlooked, product of imagination is technological invention, but it is not simply an exercise of sympathetic or theoretical imagination. Unless we want to concede that Smith left a significant lacuna in his account of imagination, then, an alternative account must be provided that is capable of explaining technological applications of imagination on par with moral and philosophical applications.
+
+<a href="https://bkmcdavid.github.io/pdfs/MarketOptimismFinalAccepted.pdf">"Plato's Market Optimism" </a> <i>Polis</i> 39 (3): 456-465 (2022). <br/>
+Abstract: Despite the extensiveness of top-down control in his ideal city, Plato takes seriously the idea that the market does not require total regulation via legislation and that participants in the market may be capable of self-regulation. This paper examines the discussion of market regulation in the <i>Republic</i> and argues that the philosopher rulers play a very limited role in regulating market activities. Indeed, they are concerned only with averting excesses of wealth and poverty. The rules and regulations that are foundational to the daily functioning of the market – enforcement of contracts, resolution of disputes, etc. – are endogenous to the market participants themselves. In allowing for this self-regulation, Plato expresses tempered optimism about the market and a profound confidence in his ideal city’s educational program. 
+
+<a href="https://impactum-journals.uc.pt/platojournal/article/view/10640/8201">"'Meddling in the Work of Another': πολυπραγμονεῖν in Plato’s <i>Republic</i>"</a> <i>Plato Journal</i> 23: 95 – 107 (2022). <br/>
+Abstract: The second conjunct of the <i>Republic</i>’s account of justice—that justice is “not meddling in the work of another”—has been neglected in Plato literature. This paper argues that the conjunct does more work than merely reiterating the content of the first conjunct—that justice is “doing one’s own work.” I argue that Socrates develops the concept at work in this conjunct from its introduction with the Principle of Specialization in Book II to its final deployment in the finished conception of justice in Book IV. Crucial to that concept’s development is the way in which the notion of “another” comes to refer to members of distinct classes or parts, i.e. takes on an inter-part connotation beyond a mere intra-part connotation. The first conjunct—that justice is “doing one’s own work”—does not connote the same divisions, and so the conjuncts should not be understood as equivalent or mutually entailed. 
+
+<a href="https://bkmcdavid.github.io/pdfs/CityofPigsProofs.pdf">"On Why Clocks and the City of Pigs are Not Just"</a> <i>Journal of the History of Philosophy</i> 57 (4): 571 – 594 (2019). <br/>
+Abstract: Some Plato scholars have recently argued that the "City of Pigs"—described in Book II of the <i>Republic</i>, before Socrates goes on to describe Kallipolis and the definition of justice—is better and more just than Kallipolis itself. I argue that this interpretation misconstrues Plato's conception of justice by ignoring three significant conditions that he establishes for making an entity eligible for being just. In overlooking these conditions, scholars have misconceived the definition of justice itself, resulting in an overestimation of the virtue of the City of Pigs.
+
+
+
+

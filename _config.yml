@@ -1,0 +1,29 @@
+# Google Analytics
+google_analytics: G-J7PF5FLC2Q
+
+# Dependencies
+markdown:         kramdown
+highlighter:      rouge
+
+# Permalinks
+permalink:        pretty
+#relative_permalinks: true
+
+# Setup
+title:            Brennan McDavid
+tagline:          'personal website'
+description:      ''
+url:              https://bkmcdavid.github.io
+baseurl:          /
+
+author:
+  name:           'Brennan McDavid'
+  url:            https://bkmcdavid.github.io
+
+paginate:         5
+
+# Custom vars
+version:          2.1.0
+
+github:
+  repo:           https://bkmcdavid.github.io
