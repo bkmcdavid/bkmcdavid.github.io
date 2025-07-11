@@ -33,7 +33,7 @@
       <div class="research-areas-container">
         <!-- Study of Wine -->
         <div class="research-box">
-          <div class="research-image" style="background-image: url('/img/oldvines.jpg');">
+          <div class="research-image" style="background-image: url('/img/oldvines.jpg'); height: 300px;">
             <div class="research-title">Study of Wine</div>
         </div>
         <div class="research-desc">
@@ -50,19 +50,19 @@
 
         <!-- Research of Wine -->
         <div class="research-box">
-          <div class="research-image" style="background-image: url('/img/fermentationeggs.jpg');">
+          <div class="research-image" style="background-image: url('/img/fermentationeggs.jpg'); height: 300px;">
             <div class="research-title">Research of Wine</div>
           </div>
           <div class="research-desc">
             <span>
-            This has to wait for post-tenure. 
+            This has to wait for post-tenure. I am generally interested in ancient practives in vineyard management and fermentation (specifically, the way that winemakers use yeast). 
             </span>
           </div>
         </div>
 
         <!-- Wine Tourism -->
         <div class="research-box">
-          <div class="research-image" style="background-image: url('/img/adelaide.jpg');">
+          <div class="research-image" style="background-image: url('/img/adelaide.jpg'); height: 300px;">
             <div class="research-title">Wine Tourism</div>
           </div>
           <div class="research-desc">
@@ -83,5 +83,19 @@
       </div>
     </main>
   </div>
+<script>
+function toggleDesc(e, elem) {
+  e.preventDefault();
+  var moreText = elem.nextElementSibling;
+  if (moreText.style.display === 'none' || moreText.style.display === '') {
+    moreText.style.display = 'inline';
+    elem.textContent = 'Read less';
+  } else {
+    moreText.style.display = 'none';
+    elem.textContent = 'Read more';
+  }
+}
+</script>
+
 </body>
 </html
