@@ -28,6 +28,7 @@ main {
 
 /* SIDEBAR */
 .sidebar-nav {
+  position: fixed; 
   width: 280px;
   background: #f6f7fa;
   padding: 0;
