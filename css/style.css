@@ -9,16 +9,13 @@ html, body {
 }
 
 .container {
-  display: flex;
   min-height: 100vh;
+  margin-left: 280px; /* This matches your sidebar width */
 }
 
 main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;   /* horizontally center contents */
-  justify-content: center; /* optionally, to vertically center if desired */
-  flex: 1;
+  width: 100%;
+  padding: 0;
 }
 
 .bio {
@@ -28,16 +25,16 @@ main {
 
 /* SIDEBAR */
 .sidebar-nav {
-  position: fixed; 
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 280px;
+  height: 100vh;
   background: #f6f7fa;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  z-index: 1000;
   border-right: 1.5px solid #e5e5ea;
-  min-height: 100vh;
 }
+
 
 .sidebar-content {
   display: flex;
@@ -221,6 +218,7 @@ main {
   }
   
     .container {
+    margin-left: 0
     display: block !important;   /* Remove flex container */
     min-height: unset;
   }
