@@ -218,7 +218,7 @@ main {
   }
   
     .container {
-    margin-left: 0
+    margin-left: 0 !important;
     display: block !important;   /* Remove flex container */
     min-height: unset;
   }
