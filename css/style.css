@@ -129,7 +129,7 @@ main {
   background: #fff;
   border-radius: 24px;
   overflow: hidden;
-  max-height: 400px; /* Slightly larger photo */
+  max-height: 500px; /* Slightly larger photo */
   display: flex;
   align-items: center;
   justify-content: center;
