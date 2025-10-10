@@ -101,17 +101,18 @@ main {
   box-sizing: border-box;
 }
 
-.research-areas-container {
+/* --- BEGIN: Intro Section Styles (formerly 'research') --- */
+
+.intro-areas-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 2rem;
-  justify-content: flex-start;
   margin: 2rem 0;
 }
 
-.research-box {
+.intro-box {
   background: #fff;
-  border-radius: 12px;
+  border-radius: 24px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.07);
   overflow: hidden;
   width: 100%;
@@ -124,54 +125,38 @@ main {
   margin-right: auto;
 }
 
-.research-image {
+.intro-image {
   width: 100%;
   background: #fff;
-  border-radius: 24px;  /* All corners rounded, larger for a softer look */
+  border-radius: 24px;
   overflow: hidden;
-  max-height: 440px;    /* Slightly larger photo */
+  max-height: 400px; /* Slightly larger photo */
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.research-image img {
+.intro-image img {
   width: auto;
   max-width: 100%;
-  max-height: 440px;
+  max-height: 400px;
   height: auto;
   display: block;
-  border-radius: 24px;   /* All corners rounded, matches container */
+  border-radius: 24px;
   object-fit: contain;
+  margin: 0;
 }
 
-
-.research-title {
-  background: rgba(17, 19, 36, 0.83);
-  color: #fff;
-  font-size: 1.18rem;
-  font-weight: 600;
-  padding: 10px 16px;
-  border-radius: 0 0 0 0;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-}
-
-.research-desc {
-  padding: 1.1rem 1.4rem 1.4rem 1.4rem;
+.intro-desc {
+  padding: 0 1.4rem 1.4rem 1.4rem;  /* Remove top padding, keep sides and bottom */
   font-size: 1.25rem;
   color: #333;
   position: relative;
 }
 
-.research-desc,
-.research-desc span,
-.research-desc ul,
-.paper-abstract {
-  font-family: 'Inter', Arial, sans-serif;
-  font-weight: 400;
-}
+/* --- END: Intro Section Styles --- */
 
 .read-more {
   display: block;
@@ -202,17 +187,6 @@ main {
   font-style: italic;
   color: #444;
 }  
-
-.research-areas-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  margin: 2rem 0;
-}
-
-.research-box {
-  width: 100%;
-}
 
 /* ===== Mobile Styles: Topbar Menu and Full-Width Content ===== */
 @media (max-width: 900px) {
@@ -299,24 +273,25 @@ main {
     padding: 1em 0.2em 0 0.2em;
   }
 
-  .research-box {
+  .intro-box {
     max-width: 100%;
     margin-left: 0;
     margin-right: 0;
   }
 
-  @media (max-width: 900px) {
-  .research-image {
-    max-height: 260px;
+  .intro-image {
+    max-height: 240px;
     border-radius: 18px;
+    margin-top: 1rem;
+    margin-bottom: 0.7rem;
   }
-  .research-image img {
-    max-height: 260px;
+  .intro-image img {
     border-radius: 18px;
+    max-height: 240px;
   }
-}
 
-  .research-desc {
+  .intro-desc {
+    padding: 0 1.1rem 1.1rem 1.1rem;
     font-size: 1.08rem;
   }
 }
