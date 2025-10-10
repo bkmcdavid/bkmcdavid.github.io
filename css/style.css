@@ -19,7 +19,7 @@ main {
 }
 
 .bio {
-  text-align: centert;
+  text-align: center;
   width: 100%;
 }
 
@@ -34,7 +34,6 @@ main {
   z-index: 1000;
   border-right: 1.5px solid #e5e5ea;
 }
-
 
 .sidebar-content {
   display: flex;
@@ -100,7 +99,7 @@ main {
 }
 
 .homepage-container {
-  max-width: 440px;
+  max-width: 1000px; /* Increased size for homepage */
   margin: 0 auto;
   text-align: center;
   padding: 2em 1em 0 1em;
@@ -120,16 +119,19 @@ main {
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.07);
   overflow: hidden;
-  width: calc(50% - 2rem);
+  width: 100%; /* Make it larger on desktop */
   margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
   min-width: 270px;
+  max-width: 1000px; /* Increased size */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .research-image {
   position: relative;
-  height: 180px;
+  height: 550px; /* Increased size */
   background-size: cover;
   background-position: center;
   display: flex;
@@ -151,7 +153,7 @@ main {
 
 .research-desc {
   padding: 1.1rem 1.4rem 1.4rem 1.4rem;
-  font-size: 1.03rem;
+  font-size: 1.25rem; /* Increased size */
   color: #333;
   position: relative;
 }
@@ -205,19 +207,9 @@ main {
   width: 100%;
 }
 
-
 /* Responsive: On small screens, sidebar becomes topbar */
 @media (max-width: 900px) {
-  .research-areas-container {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .research-box {
-    width: 100%;
-  }
-  
-    .container {
+  .container {
     margin-left: 0 !important;
     display: block !important;   /* Remove flex container */
     min-height: unset;
@@ -230,43 +222,85 @@ main {
     border: none;
     position: static;
     display: block;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    z-index: 1000;
   }
+
   .sidebar-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch; /* Make children stretch horizontally */
     justify-content: flex-start;
     height: auto;
-    padding: 2em 1em 1em 1em;
-    gap: 1em;
+    padding: 0.7em 0.5em 0.5em 0.5em;
+    gap: 0.2em;
     box-shadow: none;
+    width: 100%;
   }
+
   .sidebar-name {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     text-align: center;
-    margin: 0;
-    padding-bottom: 0.5em;
+    margin: 0 0 0.5em 0;
+    padding: 0;
     display: block;
-    /* No flex here */
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    line-height: 1.1;
   }
+
   .sidebar-links {
+    display: flex;
     flex-direction: column;
-    gap: 0.7em;
+    align-items: stretch; /* Each link fills width */
+    gap: 0.2em;
     margin-bottom: 0;
     width: 100%;
-    align-items: center;
-    font-size: 1em;
+    font-size: 1.08em;
   }
+
   .sidebar-links a {
     display: block;
     width: 100%;
     text-align: center;
+    padding: 0.75em 0;
+    border-radius: 0;
+    background: none;
+    color: #223;
+    font-weight: 500;
+    transition: background 0.15s, color 0.15s;
   }
+
+  .sidebar-links a:hover,
+  .sidebar-links a:focus {
+    background: #e0e7ff;
+    color: #2563eb;
+  }
+
   main {
-    margin: 0; /* Remove any large left/right margin from desktop */
+    margin: 0;
     padding: 2em 0.5em 0 0.5em;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+  }
+
+  .homepage-container {
+    max-width: 100%;
+    padding: 1em 0.2em 0 0.2em;
+  }
+
+  .research-box {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .research-image {
+    height: 300px; /* Slightly smaller for mobile */
+  }
+
+  .research-desc {
+    font-size: 1.08rem;
   }
 }
