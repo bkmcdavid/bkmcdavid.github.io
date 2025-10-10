@@ -127,10 +127,9 @@ main {
 .research-image {
   width: 100%;
   background: #fff;
-  border-radius: 12px 12px 0 0;
+  border-radius: 24px;  /* All corners rounded, larger for a softer look */
   overflow: hidden;
-  /* Set a max-height and center the image if needed */
-  max-height: 350px;
+  max-height: 440px;    /* Slightly larger photo */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -139,12 +138,13 @@ main {
 .research-image img {
   width: auto;
   max-width: 100%;
-  max-height: 350px;
+  max-height: 440px;
   height: auto;
   display: block;
-  border-radius: 12px 12px 0 0;
+  border-radius: 24px;   /* All corners rounded, matches container */
   object-fit: contain;
 }
+
 
 .research-title {
   background: rgba(17, 19, 36, 0.83);
@@ -305,16 +305,16 @@ main {
     margin-right: 0;
   }
 
+  @media (max-width: 900px) {
   .research-image {
-    max-height: 200px;
+    max-height: 260px;
+    border-radius: 18px;
   }
   .research-image img {
-    border-radius: 12px 12px 0 0;
-    width: auto;
-    max-width: 100%;
-    max-height: 200px;
-    height: auto;
+    max-height: 260px;
+    border-radius: 18px;
   }
+}
 
   .research-desc {
     font-size: 1.08rem;
