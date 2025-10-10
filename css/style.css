@@ -8,6 +8,7 @@ html, body {
   color: #222;
 }
 
+/* ===== Desktop Styles: Full Sidebar ===== */
 .container {
   min-height: 100vh;
   margin-left: 280px; /* This matches your sidebar width */
@@ -23,7 +24,6 @@ main {
   width: 100%;
 }
 
-/* SIDEBAR */
 .sidebar-nav {
   position: fixed;
   top: 0;
@@ -38,7 +38,7 @@ main {
 .sidebar-content {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* space between name & links */
+  justify-content: space-between;
   align-items: center;
   height: 100vh;
   padding: 0 1.2em;
@@ -86,7 +86,6 @@ main {
   width: 300px;
   height: auto;
   object-fit: cover;
-  /* border-radius: 50%; */
   box-shadow: 0 1px 6px rgba(0,0,0,0.15);
   display: block;
   margin-left: auto;
@@ -203,7 +202,7 @@ main {
   width: 100%;
 }
 
-/* Responsive: On small screens, sidebar becomes topbar */
+/* ===== Mobile Styles: Topbar Menu ===== */
 @media (max-width: 900px) {
   .container {
     margin-left: 0 !important;
@@ -216,10 +215,12 @@ main {
     min-height: auto;
     background: #f6f7fa;
     border: none;
+    border-bottom: 1.5px solid #e5e5ea;
     position: static;
     display: block;
     box-shadow: 0 2px 8px rgba(0,0,0,0.03);
     z-index: 1000;
+    height: auto;
   }
 
   .sidebar-content {
@@ -227,7 +228,7 @@ main {
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
-    height: auto; /* Remove 100vh, fixes large gap */
+    height: auto;
     gap: 0.2em;
     padding: 0.7em 0.5em 0.5em 0.5em;
     box-shadow: none;
@@ -249,8 +250,8 @@ main {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 0.3em; /* Slightly more space between links */
-    margin-bottom: 0; /* Remove margin to reduce gap */
+    gap: 0.3em;
+    margin-bottom: 0;
     width: 100%;
     font-size: 1.08em;
   }
