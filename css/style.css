@@ -94,7 +94,7 @@ main {
 }
 
 .homepage-container {
-  max-width: 1000px;
+  max-width: 700px;
   margin: 0 auto;
   text-align: center;
   padding: 2em 1em 0 1em;
@@ -119,19 +119,26 @@ main {
   display: flex;
   flex-direction: column;
   min-width: 270px;
-  max-width: 1000px;
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
 }
 
+/* Use for the container of the image */
 .research-image {
-  position: relative;
-  height: 550px;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  width: 100%;
+  background: #fff;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+
+/* Ensures the image scales responsively and is not cropped */
+.research-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px 12px 0 0;
+  object-fit: contain;
 }
 
 .research-title {
@@ -202,7 +209,7 @@ main {
   width: 100%;
 }
 
-/* ===== Mobile Styles: Topbar Menu ===== */
+/* ===== Mobile Styles: Topbar Menu and Full-Width Content ===== */
 @media (max-width: 900px) {
   .container {
     margin-left: 0 !important;
@@ -293,8 +300,11 @@ main {
     margin-right: 0;
   }
 
-  .research-image {
-    height: 300px;
+  .research-image img {
+    border-radius: 12px 12px 0 0;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
   }
 
   .research-desc {
