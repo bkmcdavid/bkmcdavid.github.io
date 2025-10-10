@@ -44,7 +44,6 @@ main {
   padding: 0 1.2em;
 }
 
-/* Name vertically centered */
 .sidebar-name {
   font-size: 2.6rem;
   font-weight: 700;
@@ -56,10 +55,8 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* font-family: 'Inter', Arial, sans-serif;  <-- REMOVE this line */
 }
 
-/* Nav items at the bottom, same serif as rest of site */
 .sidebar-links {
   display: flex;
   flex-direction: column;
@@ -67,7 +64,6 @@ main {
   font-size: 1.25em;
   font-weight: 500;
   align-items: center;
-  /* font-family: 'Inter', Arial, sans-serif;  <-- REMOVE this line */
   margin-bottom: 3em;
 }
 
@@ -99,7 +95,7 @@ main {
 }
 
 .homepage-container {
-  max-width: 1000px; /* Increased size for homepage */
+  max-width: 1000px;
   margin: 0 auto;
   text-align: center;
   padding: 2em 1em 0 1em;
@@ -119,19 +115,19 @@ main {
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.07);
   overflow: hidden;
-  width: 100%; /* Make it larger on desktop */
+  width: 100%;
   margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
   min-width: 270px;
-  max-width: 1000px; /* Increased size */
+  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .research-image {
   position: relative;
-  height: 550px; /* Increased size */
+  height: 550px;
   background-size: cover;
   background-position: center;
   display: flex;
@@ -153,7 +149,7 @@ main {
 
 .research-desc {
   padding: 1.1rem 1.4rem 1.4rem 1.4rem;
-  font-size: 1.25rem; /* Increased size */
+  font-size: 1.25rem;
   color: #333;
   position: relative;
 }
@@ -211,7 +207,7 @@ main {
 @media (max-width: 900px) {
   .container {
     margin-left: 0 !important;
-    display: block !important;   /* Remove flex container */
+    display: block !important;
     min-height: unset;
   }
 
@@ -229,11 +225,11 @@ main {
   .sidebar-content {
     display: flex;
     flex-direction: column;
-    align-items: stretch; /* Make children stretch horizontally */
+    align-items: stretch;
     justify-content: flex-start;
-    height: auto;
-    padding: 0.7em 0.5em 0.5em 0.5em;
+    height: auto; /* Remove 100vh, fixes large gap */
     gap: 0.2em;
+    padding: 0.7em 0.5em 0.5em 0.5em;
     box-shadow: none;
     width: 100%;
   }
@@ -252,9 +248,9 @@ main {
   .sidebar-links {
     display: flex;
     flex-direction: column;
-    align-items: stretch; /* Each link fills width */
-    gap: 0.2em;
-    margin-bottom: 0;
+    align-items: stretch;
+    gap: 0.3em; /* Slightly more space between links */
+    margin-bottom: 0; /* Remove margin to reduce gap */
     width: 100%;
     font-size: 1.08em;
   }
@@ -297,7 +293,7 @@ main {
   }
 
   .research-image {
-    height: 300px; /* Slightly smaller for mobile */
+    height: 300px;
   }
 
   .research-desc {
