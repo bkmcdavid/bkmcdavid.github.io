@@ -101,8 +101,7 @@ main {
   box-sizing: border-box;
 }
 
-/* --- BEGIN: Intro Section Styles (formerly 'research') --- */
-
+/* --- BEGIN: Intro Section Styles --- */
 .intro-areas-container {
   display: flex;
   flex-direction: column;
@@ -155,9 +154,72 @@ main {
   color: #333;
   position: relative;
 }
-
 /* --- END: Intro Section Styles --- */
 
+/* ===== Research Boxes ===== */
+.research-areas-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin: 2.5rem 0;
+}
+
+.research-box {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.09);
+  overflow: hidden;
+  width: 100%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.17s;
+}
+
+.research-box:hover {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+}
+
+.research-image {
+  width: 100%;
+  min-height: 220px;
+  max-height: 320px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 24px 24px 0 0;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.research-title {
+  background: rgba(17, 19, 36, 0.85);
+  color: #fff;
+  font-size: 1.14rem;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 0 10px 0 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+}
+
+.research-desc {
+  padding: 1.4rem 1.6rem 1.6rem 1.6rem;
+  font-size: 1.15rem;
+  color: #333;
+  background: #fff;
+  border-radius: 0 0 24px 24px;
+  position: relative;
+  text-align: left;
+}
+
+/* Read more/abstract toggles */
 .read-more {
   display: block;
   margin-top: 0.75em;
@@ -293,5 +355,33 @@ main {
   .intro-desc {
     padding: 0 1.1rem 1.1rem 1.1rem;
     font-size: 1.08rem;
+  }
+
+  .research-areas-container {
+    gap: 1.3rem;
+    margin: 1.4rem 0;
+  }
+
+  .research-box {
+    max-width: 100%;
+    border-radius: 15px;
+  }
+
+  .research-image {
+    min-height: 120px;
+    max-height: 180px;
+    border-radius: 15px 15px 0 0;
+  }
+
+  .research-title {
+    font-size: 1rem;
+    padding: 7px 12px;
+    border-radius: 0 8px 0 0;
+  }
+
+  .research-desc {
+    padding: 1.0rem 1.1rem 1.1rem 1.1rem;
+    font-size: 1em;
+    border-radius: 0 0 15px 15px;
   }
 }
