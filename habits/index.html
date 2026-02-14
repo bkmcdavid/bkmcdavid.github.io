@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Habits of Discourse — Chapman University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg-subtle: #111118;
+  --spark-gold: #e8a838;
+  --spark-orange: #d4622a;
+  --spark-white: #f5e6c8;
+  --text-primary: #e8e4dc;
+  --text-secondary: #9a9590;
+  --text-muted: #5e5955;
+  --accent: #c9853a;
+  --accent-dim: #8a5a28;
+  --danger-red: #b84233;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-dim) var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ============ SPARK CANVAS ============ */
+#spark-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ============ NAV ============ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to bottom, rgba(10,10,15,0.95) 0%, rgba(10,10,15,0) 100%);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: padding 0.4s ease;
+}
+
+nav.scrolled {
+  padding: 0.8rem 3rem;
+  background: rgba(10,10,15,0.96);
+}
+
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.nav-logo span {
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover { color: var(--spark-gold); }
+.nav-links a:hover::after { width: 100%; }
+
+/* ============ SECTIONS GENERAL ============ */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section-label::before {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--accent-dim);
+}
+
+/* ============ HERO ============ */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 3rem;
+}
+
+.hero-content {
+  max-width: 800px;
+  animation: fadeUp 1.2s ease-out both;
+}
+
+.hero-tagline {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  color: var(--accent);
+  margin-bottom: 2rem;
+  animation: fadeUp 1.2s ease-out 0.2s both;
+}
+
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--text-primary);
+  margin-bottom: 0.3em;
+  animation: fadeUp 1.2s ease-out 0.4s both;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--spark-gold);
+  font-weight: 400;
+}
+
+.hero-subtitle {
+  font-family: var(--serif);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  animation: fadeUp 1.2s ease-out 0.6s both;
+}
+
+.hero-meta {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  animation: fadeUp 1.2s ease-out 0.8s both;
+}
+
+.hero-meta span {
+  color: var(--text-secondary);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: fadeUp 1.2s ease-out 1.2s both;
+}
+
+.scroll-hint span {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--text-muted);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--accent-dim), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+/* ============ ABOUT ============ */
+#about {
+  padding: 8rem 0;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.about-left h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+
+.about-left h2 em {
+  font-style: italic;
+  color: var(--spark-gold);
+}
+
+.about-quote {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  border-left: 2px solid var(--accent-dim);
+  padding-left: 1.5rem;
+  margin-top: 2rem;
+}
+
+.about-quote cite {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  font-style: normal;
+  color: var(--text-muted);
+}
+
+.about-right p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.about-right p:first-of-type::first-letter {
+  font-family: var(--serif);
+  font-size: 3rem;
+  float: left;
+  line-height: 0.8;
+  margin-right: 0.5rem;
+  margin-top: 0.15rem;
+  color: var(--accent);
+}
+
+/* ============ DANGEROUS IDEAS ============ */
+#dangerous-ideas {
+  padding: 8rem 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(20,18,14,0.4) 30%, rgba(20,18,14,0.4) 70%, transparent 100%);
+}
+
+.di-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 5rem;
+}
+
+.di-header h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.di-header h2 em { font-style: italic; color: var(--danger-red); }
+
+.di-header p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.di-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin-bottom: 5rem;
+}
+
+.pillar {
+  border: 1px solid rgba(200,170,130,0.08);
+  border-radius: 2px;
+  padding: 2.5rem 2rem;
+  background: rgba(255,255,255,0.015);
+  transition: border-color 0.4s, transform 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.pillar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.pillar:hover { border-color: rgba(200,170,130,0.2); transform: translateY(-4px); }
+.pillar:hover::before { opacity: 1; }
+
+.pillar-icon {
+  font-size: 1.6rem;
+  margin-bottom: 1.2rem;
+  display: block;
+}
+
+.pillar h3 {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+  color: var(--text-primary);
+}
+
+.pillar p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ============ METHOD ============ */
+.method-section {
+  margin-top: 2rem;
+}
+
+.method-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+
+.method-steps::before {
+  content: '';
+  position: absolute;
+  top: 2rem;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-dim), var(--accent-dim), transparent);
+}
+
+.method-step {
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.step-num {
+  font-family: var(--serif);
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+  display: inline-block;
+  padding: 0 0.5rem;
+}
+
+.step-title {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.step-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ============ EVENTS ============ */
+#events {
+  padding: 8rem 0;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.event-card {
+  border: 1px solid rgba(200,170,130,0.08);
+  border-radius: 2px;
+  padding: 2rem;
+  background: rgba(255,255,255,0.01);
+  transition: border-color 0.4s;
+  position: relative;
+}
+
+.event-card:hover { border-color: rgba(200,170,130,0.2); }
+
+.event-type {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+}
+
+.event-card h3 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+}
+
+.event-card p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.event-years {
+  margin-top: 1rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+/* ============ TEAM ============ */
+#team {
+  padding: 8rem 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(20,18,14,0.3) 30%, rgba(20,18,14,0.3) 70%, transparent 100%);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-top: 3rem;
+}
+
+.team-member {
+  border: 1px solid rgba(200,170,130,0.08);
+  border-radius: 2px;
+  padding: 3rem;
+  background: rgba(255,255,255,0.01);
+  transition: border-color 0.4s;
+}
+
+.team-member:hover { border-color: rgba(200,170,130,0.15); }
+
+.member-role {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.member-name {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.member-title {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.member-bio {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.member-bio + .member-bio { margin-top: 1rem; }
+
+/* ============ IMPACT ============ */
+#impact {
+  padding: 8rem 0;
+}
+
+.impact-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+}
+
+.stat {
+  text-align: center;
+  padding: 2rem 1rem;
+  border: 1px solid rgba(200,170,130,0.06);
+  border-radius: 2px;
+}
+
+.stat-number {
+  font-family: var(--serif);
+  font-size: 2.8rem;
+  font-weight: 300;
+  color: var(--spark-gold);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+.impact-text {
+  max-width: 750px;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.impact-text p + p { margin-top: 1rem; }
+
+/* ============ FOOTER ============ */
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(200,170,130,0.06);
+  padding: 4rem 0 3rem;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.footer-brand {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.footer-brand span { color: var(--accent); }
+
+.footer-inst {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.footer-inst a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-inst a:hover { color: var(--accent); }
+
+.footer-right {
+  text-align: right;
+}
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover { color: var(--accent); }
+
+.footer-copy {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 0.8; transform: scaleY(1.2); }
+}
+
+/* Scroll-triggered fade-in */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .container { padding: 0 1.5rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .di-pillars { grid-template-columns: 1fr; }
+  .method-steps { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .method-steps::before { display: none; }
+  .events-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
+  .impact-stats { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { flex-direction: column; gap: 2rem; }
+  .footer-right { text-align: left; }
+}
+
+@media (max-width: 600px) {
+  .hero-title { font-size: 2.4rem; }
+  .method-steps { grid-template-columns: 1fr; }
+  .impact-stats { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="spark-canvas"></canvas>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo">The Habits of <span>Discourse</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#dangerous-ideas">Dangerous Ideas</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#impact">Impact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">The Habits of<br><em>Discourse</em></h1>
+    <p class="hero-subtitle">Cultivating openness, humility, and courage in the practice of civil disagreement</p>
+    <p class="hero-meta">Funded by the <span>Arthur Vining Davis Foundations</span> · 2026 – 2029</p>
+  </div>
+  <div class="scroll-hint">
+    <span>Explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left reveal">
+        <div class="section-label">The Problem &amp; The Vision</div>
+        <h2>We learn by doing—<br>and what we <em>become</em><br>is what we <em>do</em></h2>
+        <div class="about-quote">
+          "Legislators make citizens good by forming habits in them."
+          <cite>— Aristotle, Nicomachean Ethics 2.1</cite>
+        </div>
+      </div>
+      <div class="about-right reveal" style="transition-delay: 0.15s;">
+        <p>The public sphere is increasingly polarized and ideological. Among students, we observe two troubling responses: some readily jump on a party bandwagon, letting emotion cloud reason, while others—trepidatious of charged debate—choose apathy and disengagement.</p>
+        <p>The Habits of Discourse militates against both tendencies. Rooted in the Aristotelian insight that effective civil discourse requires ongoing civic practice, the project develops intellectual habits in students that encourage open and civil engagement. Through our "Dangerous Ideas" courses—targeting first-year students—and a series of public events aimed at the broader community, we cultivate the virtues that underlie productive disagreement.</p>
+        <p>Modern neuroscience characterizes the relationship between habit and repetition in terms that echo Aristotle: repeated practice shapes neural pathways, and these ingrained patterns predispose us to default to familiar modes of engagement. What constitutes our routines of civic engagement makes a profound difference to what we can enjoy, tolerate, or scarcely endure in our fellow citizens.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DANGEROUS IDEAS -->
+<section id="dangerous-ideas">
+  <div class="container">
+    <div class="di-header reveal">
+      <div class="section-label" style="justify-content: center;">The Courses</div>
+      <h2><em>Dangerous Ideas</em></h2>
+      <p>First-year seminars that confront deeply held values through structured routines of argument, evidence, and debate—rewiring the way students approach disagreement.</p>
+    </div>
+
+    <div class="di-pillars">
+      <div class="pillar reveal">
+        <span class="pillar-icon">◯</span>
+        <h3>Openness</h3>
+        <p>Curated reading lists induce a sense of the mildly overwhelming complexity of each issue. Just as Socrates induced perplexity, this tactic dissolves overconfidence and engenders the humility that arises in confrontation with what is complicated and surprising.</p>
+      </div>
+      <div class="pillar reveal" style="transition-delay: 0.1s;">
+        <span class="pillar-icon">△</span>
+        <h3>Humility</h3>
+        <p>Students practice argument visualization, reproduce reasoning in mapping software, and critically evaluate data—learning to distinguish correlation from causation, selection bias from signal. The routine makes careful thinking habitual.</p>
+      </div>
+      <div class="pillar reveal" style="transition-delay: 0.2s;">
+        <span class="pillar-icon">⬡</span>
+        <h3>Courage</h3>
+        <p>Oxford-style debates and encounters with classroom visitors who espouse controversial positions provide controlled, choreographed disruptions—chances to practice sticking to arguments and evidence even when emotions are rising.</p>
+      </div>
+    </div>
+
+    <div class="method-section reveal">
+      <div class="section-label" style="justify-content: center;">The Habituation Cycle</div>
+      <div class="method-steps">
+        <div class="method-step">
+          <div class="step-num">I</div>
+          <div class="step-title">Map the Arguments</div>
+          <div class="step-desc">Argument visualization with MindMup to externalize reasoning structures</div>
+        </div>
+        <div class="method-step">
+          <div class="step-num">II</div>
+          <div class="step-title">Interrogate the Data</div>
+          <div class="step-desc">Mini-labs on method, causation, and the limits of evidence</div>
+        </div>
+        <div class="method-step">
+          <div class="step-num">III</div>
+          <div class="step-title">Encounter the Gadfly</div>
+          <div class="step-desc">Classroom visitors who provoke and sting—the Millian golden opportunity</div>
+        </div>
+        <div class="method-step">
+          <div class="step-num">IV</div>
+          <div class="step-title">Debate &amp; Debrief</div>
+          <div class="step-desc">Oxford-rules debates as an "ideological Turing test" of understanding</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="container">
+    <div class="section-label reveal">Public-Facing Events</div>
+    <h2 class="reveal" style="font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; max-width: 600px; margin-bottom: 1rem;">Exporting discourse <em style="font-style:italic;color:var(--spark-gold);">beyond</em> the classroom</h2>
+    <p class="reveal" style="font-size: 0.95rem; color: var(--text-secondary); max-width: 600px;">A series of cross-over events that invite the wider Chapman and Orange, CA, community to experience rhetorical confrontation, spirited debate, and the intellectual growth that make Dangerous Ideas worthwhile.</p>
+
+    <div class="events-grid">
+      <div class="event-card reveal">
+        <div class="event-type">DI × Law</div>
+        <h3>October Term</h3>
+        <p>Moderated debates among legal scholars on controversial cases for which the Supreme Court is slated to hear arguments, hosted in partnership with the Fowler School of Law.</p>
+        <div class="event-years">Fall 2026 · Fall 2027 · Fall 2028</div>
+      </div>
+      <div class="event-card reveal" style="transition-delay: 0.1s;">
+        <div class="event-type">DI × Science</div>
+        <h3>Trust in Science</h3>
+        <p>Panels featuring scientists who are in productive disagreement with one another on active research questions, modeling how experts argue when the stakes are real.</p>
+        <div class="event-years">Spring 2027 · Spring 2028 · Spring 2029</div>
+      </div>
+      <div class="event-card reveal" style="transition-delay: 0.2s;">
+        <div class="event-type">DI × Democracy</div>
+        <h3>Election 2028</h3>
+        <p>A major event timed to the 2028 presidential election, modeling the kind of discourse we want to see in the public sphere during a moment of peak polarization.</p>
+        <div class="event-years">Fall 2028</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="container">
+    <div class="section-label reveal">Principal Investigators</div>
+    <h2 class="reveal" style="font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; margin-bottom: 0.5rem;">The team behind <em style="font-style:italic;color:var(--spark-gold);">Dangerous Ideas</em></h2>
+
+    <div class="team-grid">
+      <div class="team-member reveal">
+        <div class="member-role">Lead PI</div>
+        <div class="member-name">Brennan McDavid</div>
+        <div class="member-title">Assistant Professor of Philosophy · Chapman University</div>
+        <p class="member-bio">Brennan McDavid is a philosopher specializing in ancient theories of human nature and moral development. She holds a Ph.D. from Princeton University and brings extensive scholarly expertise and classroom experience with the theories of learning espoused by Socrates, Plato, and Aristotle. Her published work spans ancient Greek ethics and political thought, with recent publications in <em>Classical Quarterly</em>, <em>Ancient Philosophy</em>, and the <em>History of Political Economy</em>.</p>
+        <p class="member-bio">A member of Chapman's Smith Institute for Political Economy and Philosophy, McDavid has spearheaded the creation of an informal civil discourse society on campus and led the pilot of Dangerous Ideas in Fall 2024.</p>
+      </div>
+      <div class="team-member reveal" style="transition-delay: 0.1s;">
+        <div class="member-role">Co-PI</div>
+        <div class="member-name">Erik Kimbrough</div>
+        <div class="member-title">Professor of Economics · Chapman University</div>
+        <p class="member-bio">Erik Kimbrough is an economist specializing in the study of norms and polarization, with a Ph.D. from the University of Arizona. He has been PI or co-investigator on grant projects totaling over $4 million, including a $2.5M John Templeton Foundation grant on liberalism and a SSHRC Insight Grant on norms-based interventions to support democracy. His work has appeared in the <em>American Economic Review</em>, <em>Journal of the European Economic Association</em>, and the <em>Journal of Political Economy</em>.</p>
+        <p class="member-bio">His experiences co-teaching with McDavid and other Smith Institute faculty, merged with his research on norms and polarization, motivated the creation of the Dangerous Ideas program.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact">
+  <div class="container">
+    <div class="section-label reveal">By The Numbers</div>
+    <h2 class="reveal" style="font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; margin-bottom: 0.5rem;">Three years of <em style="font-style:italic;color:var(--spark-gold);">habituation</em></h2>
+
+    <div class="impact-stats">
+      <div class="stat reveal">
+        <div class="stat-number">12</div>
+        <div class="stat-label">Courses Delivered</div>
+      </div>
+      <div class="stat reveal" style="transition-delay: 0.05s;">
+        <div class="stat-number">18</div>
+        <div class="stat-label">Faculty Initiated</div>
+      </div>
+      <div class="stat reveal" style="transition-delay: 0.1s;">
+        <div class="stat-number">360</div>
+        <div class="stat-label">Students Reached</div>
+      </div>
+      <div class="stat reveal" style="transition-delay: 0.15s;">
+        <div class="stat-number">6</div>
+        <div class="stat-label">Public Events</div>
+      </div>
+    </div>
+
+    <div class="impact-text reveal">
+      <p>Pilot data from Fall 2024 is encouraging. Students who completed the Dangerous Ideas course scored higher on openness and humility, and were less likely to support deplatforming of controversial speakers, compared to the average Chapman student and the average American college student—as measured by the FIRE College Free Speech Survey.</p>
+      <p>Over the three-year grant period, The Habits of Discourse aims to make Dangerous Ideas a fixture on Chapman's campus, building a constituency of professors passionate about and initiated to the pedagogical vision—ready to deploy their own iterations or integrate the methods into their existing courses.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">The Habits of <span>Discourse</span></div>
+        <div class="footer-inst">
+          <a href="https://www.chapman.edu/research/institutes-and-centers/smith-institute/" target="_blank" rel="noopener">Smith Institute for Political Economy &amp; Philosophy</a><br>
+          Chapman University · Orange, California
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-links">
+          <a href="#about">About</a>
+          <a href="#dangerous-ideas">Courses</a>
+          <a href="#events">Events</a>
+          <a href="#team">Team</a>
+        </div>
+        <div class="footer-copy">Funded by the Arthur Vining Davis Foundations, 2026–2029</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ============ FIREFLY SYSTEM ============
+const canvas = document.getElementById('spark-canvas');
+const ctx = canvas.getContext('2d');
+let w, h;
+let mouse = { x: -1000, y: -1000 };
+let fireflies = [];
+let time = 0;
+
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+document.addEventListener('mousemove', e => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+});
+
+class Firefly {
+  constructor() {
+    this.x = Math.random() * w;
+    this.y = Math.random() * h;
+    this.size = 1 + Math.random() * 2.5;
+
+    // Lazy, drifting movement — each firefly wanders on its own path
+    this.angle = Math.random() * Math.PI * 2;
+    this.speed = 0.12 + Math.random() * 0.32;
+    this.turnSpeed = 0.005 + Math.random() * 0.02;
+    this.turnBias = (Math.random() - 0.5) * 0.02;
+
+    // Pulsing glow — the signature firefly blink
+    this.glowPhase = Math.random() * Math.PI * 2;
+    this.glowSpeed = 0.014 + Math.random() * 0.012;
+    // Some fireflies do slow long pulses, others do quicker blinks
+    this.glowStyle = Math.random(); // 0-1, determines pulse shape
+    this.brightness = 0;
+    this.peakBrightness = 0.4 + Math.random() * 0.6;
+
+    // Color — warm range: gold, amber, soft orange
+    const colorChoice = Math.random();
+    if (colorChoice < 0.5) {
+      // Warm gold
+      this.r = 240 + Math.random() * 15;
+      this.g = 180 + Math.random() * 40;
+      this.b = 50 + Math.random() * 40;
+    } else if (colorChoice < 0.8) {
+      // Amber/orange
+      this.r = 230 + Math.random() * 25;
+      this.g = 140 + Math.random() * 50;
+      this.b = 30 + Math.random() * 30;
+    } else {
+      // Pale warm white
+      this.r = 255;
+      this.g = 220 + Math.random() * 30;
+      this.b = 160 + Math.random() * 60;
+    }
+  }
+
+  update() {
+    // Wander — gradual direction changes
+    this.angle += this.turnBias + Math.sin(time * this.turnSpeed) * 0.03;
+
+    // Occasional random direction shift
+    if (Math.random() < 0.005) {
+      this.turnBias = (Math.random() - 0.5) * 0.02;
+    }
+
+    this.x += Math.cos(this.angle) * this.speed;
+    this.y += Math.sin(this.angle) * this.speed;
+
+    // Wrap around edges softly
+    const margin = 50;
+    if (this.x < -margin) this.x = w + margin;
+    if (this.x > w + margin) this.x = -margin;
+    if (this.y < -margin) this.y = h + margin;
+    if (this.y > h + margin) this.y = -margin;
+
+    // Gentle mouse avoidance
+    const dx = this.x - mouse.x;
+    const dy = this.y - mouse.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 120 && dist > 0) {
+      const force = (120 - dist) / 120 * 0.3;
+      this.x += (dx / dist) * force;
+      this.y += (dy / dist) * force;
+    }
+
+    // Glow pulse — firefly-like blink pattern
+    this.glowPhase += this.glowSpeed;
+
+    if (this.glowStyle < 0.4) {
+      // Slow sinusoidal pulse
+      const raw = Math.sin(this.glowPhase);
+      this.brightness = this.peakBrightness * Math.max(0, raw);
+    } else if (this.glowStyle < 0.7) {
+      // Sharp blink — on briefly, off for a while
+      const cycle = this.glowPhase % (Math.PI * 2);
+      if (cycle < 0.8) {
+        this.brightness = this.peakBrightness * Math.sin(cycle / 0.8 * Math.PI);
+      } else {
+        this.brightness = 0;
+      }
+    } else {
+      // Double-blink pattern
+      const cycle = this.glowPhase % (Math.PI * 3);
+      if (cycle < 0.5) {
+        this.brightness = this.peakBrightness * Math.sin(cycle / 0.5 * Math.PI);
+      } else if (cycle > 0.8 && cycle < 1.3) {
+        this.brightness = this.peakBrightness * 0.6 * Math.sin((cycle - 0.8) / 0.5 * Math.PI);
+      } else {
+        this.brightness *= 0.9; // fade
+      }
+    }
+  }
+
+  draw() {
+    if (this.brightness < 0.02) return; // Don't draw when dark
+
+    const alpha = this.brightness;
+    const r = Math.floor(this.r);
+    const g = Math.floor(this.g);
+    const b = Math.floor(this.b);
+
+    // Outer glow — soft, diffuse
+    const glowSize = this.size * (8 + this.brightness * 6);
+    const outerGlow = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowSize);
+    outerGlow.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${alpha * 0.12})`);
+    outerGlow.addColorStop(0.4, `rgba(${r}, ${g}, ${Math.floor(b * 0.5)}, ${alpha * 0.05})`);
+    outerGlow.addColorStop(1, 'transparent');
+    ctx.fillStyle = outerGlow;
+    ctx.fillRect(this.x - glowSize, this.y - glowSize, glowSize * 2, glowSize * 2);
+
+    // Inner glow — warmer, tighter
+    const innerSize = this.size * 3;
+    const innerGlow = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, innerSize);
+    innerGlow.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${alpha * 0.5})`);
+    innerGlow.addColorStop(1, 'transparent');
+    ctx.fillStyle = innerGlow;
+    ctx.fillRect(this.x - innerSize, this.y - innerSize, innerSize * 2, innerSize * 2);
+
+    // Bright core
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size * 0.5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha * 0.9})`;
+    ctx.fill();
+
+    // Hot center
+    if (this.brightness > 0.3) {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size * 0.25, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 230, ${alpha * 0.6})`;
+      ctx.fill();
+    }
+  }
+}
+
+// Create fireflies
+const COUNT = 108;
+for (let i = 0; i < COUNT; i++) {
+  fireflies.push(new Firefly());
+}
+
+function animate() {
+  time++;
+
+  // Clear with slight persistence for soft glow trails
+  ctx.fillStyle = 'rgba(10, 10, 15, 0.3)';
+  ctx.fillRect(0, 0, w, h);
+
+  fireflies.forEach(f => { f.update(); f.draw(); });
+
+  requestAnimationFrame(animate);
+}
+animate();
+
+// ============ SCROLL REVEAL ============
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+reveals.forEach(el => observer.observe(el));
+
+// ============ NAV SCROLL ============
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('main-nav');
+  if (window.scrollY > 100) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+</script>
+
+</body>
+</html>
