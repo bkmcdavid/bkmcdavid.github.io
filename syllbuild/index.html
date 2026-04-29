@@ -466,19 +466,43 @@ main {
 
 .reading-link:hover { color: var(--spark-gold); }
 
-/* ============ TOPIC HEADER ============ */
+/* ============ TOPIC HEADER (collapsible) ============ */
+.topic-group {
+  margin-top: 3.5rem;
+}
+
+.topic-group:first-of-type {
+  margin-top: 0;
+}
+
 .topic-header {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-bottom: 1.5rem;
-  margin-top: 3.5rem;
+  background: transparent;
+  border: none;
+  padding: 0.6rem 0;
+  width: 100%;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  text-align: left;
+}
+
+.topic-header:hover .topic-name {
+  color: var(--spark-gold);
+}
+
+.topic-header:hover .topic-chevron {
+  color: var(--spark-gold);
 }
 
 .topic-glyph {
   font-size: 1.1rem;
   color: var(--accent);
   line-height: 1;
+  flex-shrink: 0;
 }
 
 .topic-name {
@@ -487,12 +511,45 @@ main {
   font-weight: 600;
   color: var(--text-primary);
   letter-spacing: 0.01em;
+  transition: color 0.25s;
+}
+
+.topic-count {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--spark-gold);
+  border: 1px solid var(--accent-dim);
+  padding: 0.25rem 0.55rem;
+  flex-shrink: 0;
 }
 
 .topic-rule {
   flex: 1;
   height: 1px;
   background: var(--border-faint);
+}
+
+.topic-chevron {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  flex-shrink: 0;
+  transition: color 0.25s, transform 0.25s;
+  width: 14px;
+  text-align: center;
+}
+
+.topic-units {
+  display: none;
+  animation: fadeUp 0.4s ease-out both;
+}
+
+.topic-units.open {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }
 
 /* ============ UNIT CARD ============ */
@@ -1306,7 +1363,9 @@ const state = {
   unitIds: [],     // selected unit IDs (any order, used in step 2)
   unitOrder: [],   // ordered unit IDs (used in step 3 onward)
   debriefIds: [],
-  expandedUnitId: null
+  expandedUnitId: null,
+  expandedTopics: new Set(),  // topics whose module list is open on Step 2
+  topicsAutoExpanded: false   // true once we've done the initial auto-expand
 };
 
 function saveDraft() {
@@ -1637,13 +1696,44 @@ function renderStep2() {
     )
   );
 
+  // On first render of Step 2, auto-expand any topic that contains a
+  // selected module so a returning user sees their picks. After that, the
+  // user's manual open/close choices are respected for the rest of the session.
+  if (!state.topicsAutoExpanded) {
+    TOPIC_ORDER.forEach(topic => {
+      const units = UNITS_BY_TOPIC[topic] || [];
+      if (units.some(u => state.unitIds.includes(u.id))) {
+        state.expandedTopics.add(topic);
+      }
+    });
+    state.topicsAutoExpanded = true;
+  }
+
   TOPIC_ORDER.filter(t => UNITS_BY_TOPIC[t]).forEach(topic => {
-    sec.appendChild(el('div', { class: 'topic-header' },
+    const isOpen = state.expandedTopics.has(topic);
+    const selectedInTopic = UNITS_BY_TOPIC[topic].filter(u => state.unitIds.includes(u.id)).length;
+
+    const group = el('div', { class: 'topic-group' });
+
+    const header = el('button', {
+      class: 'topic-header',
+      onclick: () => {
+        if (state.expandedTopics.has(topic)) state.expandedTopics.delete(topic);
+        else state.expandedTopics.add(topic);
+        render();
+      }
+    },
       el('span', { class: 'topic-glyph' }, TOPIC_GLYPHS[topic]),
       el('span', { class: 'topic-name' }, topic),
-      el('span', { class: 'topic-rule' })
-    ));
-    const list = el('div', { class: 'card-list' });
+      selectedInTopic > 0
+        ? el('span', { class: 'topic-count' }, selectedInTopic + ' selected')
+        : null,
+      el('span', { class: 'topic-rule' }),
+      el('span', { class: 'topic-chevron' }, isOpen ? '▾' : '▸')
+    );
+    group.appendChild(header);
+
+    const list = el('div', { class: 'topic-units' + (isOpen ? ' open' : '') });
     UNITS_BY_TOPIC[topic].forEach(u => {
       const checked = state.unitIds.includes(u.id);
       const disabled = state.unitIds.length >= 4;
@@ -1663,7 +1753,9 @@ function renderStep2() {
         }
       ));
     });
-    sec.appendChild(list);
+    group.appendChild(list);
+
+    sec.appendChild(group);
   });
 
   sec.appendChild(el('div', { class: 'btn-row' },
