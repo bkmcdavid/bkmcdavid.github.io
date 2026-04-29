@@ -122,6 +122,29 @@ main {
   padding: 7rem 3rem 6rem;
 }
 
+main::before {
+  content: '';
+  position: absolute;
+  top: 5rem;
+  left: 0;
+  right: 0;
+  bottom: 4rem;
+  background: rgba(10, 10, 15, 0.78);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  main::before {
+    left: -1rem;
+    right: -1rem;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%);
+  }
+}
+
 /* ============ HERO ============ */
 .hero {
   text-align: center;
@@ -499,10 +522,25 @@ main {
 }
 
 .topic-glyph {
-  font-size: 1.1rem;
-  color: var(--accent);
-  line-height: 1;
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  color: var(--spark-orange);
+  transition: color 0.25s, transform 0.25s;
+}
+
+.topic-glyph svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.topic-header:hover .topic-glyph {
+  color: var(--spark-gold);
+  transform: translateY(-2px);
 }
 
 .topic-name {
@@ -533,12 +571,13 @@ main {
 
 .topic-chevron {
   font-family: var(--mono);
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   color: var(--accent);
   flex-shrink: 0;
-  transition: color 0.25s, transform 0.25s;
+  transition: color 0.25s;
   width: 14px;
   text-align: center;
+  margin-left: -0.3rem;
 }
 
 .topic-units {
@@ -571,9 +610,19 @@ main {
 }
 
 .unit-glyph {
-  font-size: 1.3rem;
-  color: var(--accent);
-  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--spark-orange);
+  flex-shrink: 0;
+}
+
+.unit-glyph svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .unit-title {
@@ -1328,14 +1377,9 @@ const UNITS = [
   }
 ];
 
-const TOPIC_GLYPHS = {
-  "Equality & Opportunity": "◯",
-  "History & Power": "△",
-  "Politics & Society": "⬡",
-  "Science & Ethics": "◇",
-  "Gender & Sexuality": "▢",
-  "Culture & Civilization": "✦"
-};
+// Single flame icon used for every topic. SVG is inlined so it inherits
+// CSS color via `currentColor` and renders crisply at any size.
+const FLAME_SVG = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M13.5 1.5c0.4 2.7 0.1 4.7-0.9 6.1c-1 1.4-2.6 2.2-3.8 3.5c-1.5 1.7-1.5 3.4-0.6 5c-1.6-0.6-2.8-2.3-2.8-4.6c0-1.4 0.4-2.7 1.1-3.7c-2.1 1.7-3.5 4.4-3.5 7.4c0 5 4 9 9 9s9-4 9-9c0-3.6-2-6.7-4.9-8.3c0.5 1.2 0.4 2.5-0.4 3.4c-0.7 0.7-1.7 0.8-2.5 0.4c0.6-2.1 0.5-4.6-0.7-9.2z"/></svg>';
 
 const TOPIC_ORDER = ["Equality & Opportunity", "History & Power", "Politics & Society", "Science & Ethics", "Gender & Sexuality", "Culture & Civilization"];
 
@@ -1467,8 +1511,6 @@ function readingRow(reading, checked, disabled, onToggle) {
 }
 
 function unitCard(unit, checked, disabled, onToggle, expanded, onExpand) {
-  const glyph = TOPIC_GLYPHS[unit.topic] || '◯';
-
   const detailChildren = [];
   detailChildren.push(el('div', { class: 'detail-tag' }, 'Debate Resolution'));
   detailChildren.push(el('div', { class: 'detail-resolution' }, '"' + unit.debateResolution + '"'));
@@ -1491,7 +1533,7 @@ function unitCard(unit, checked, disabled, onToggle, expanded, onExpand) {
 
   const body = el('div', { class: 'unit-body' },
     el('div', { class: 'unit-head' },
-      el('span', { class: 'unit-glyph' }, glyph),
+      el('span', { class: 'unit-glyph', html: FLAME_SVG }),
       el('h3', { class: 'unit-title' }, unit.title)
     ),
     el('p', { class: 'unit-summary' }, unit.summary),
@@ -1723,13 +1765,13 @@ function renderStep2() {
         render();
       }
     },
-      el('span', { class: 'topic-glyph' }, TOPIC_GLYPHS[topic]),
+      el('span', { class: 'topic-glyph', html: FLAME_SVG }),
       el('span', { class: 'topic-name' }, topic),
+      el('span', { class: 'topic-chevron' }, isOpen ? '▾' : '▸'),
       selectedInTopic > 0
         ? el('span', { class: 'topic-count' }, selectedInTopic + ' selected')
         : null,
-      el('span', { class: 'topic-rule' }),
-      el('span', { class: 'topic-chevron' }, isOpen ? '▾' : '▸')
+      el('span', { class: 'topic-rule' })
     );
     group.appendChild(header);
 
