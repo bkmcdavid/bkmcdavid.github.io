@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syllabus Builder — The Habits of Discourse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg-subtle: #111118;
+  --spark-gold: #e8a838;
+  --spark-orange: #d4622a;
+  --spark-white: #f5e6c8;
+  --text-primary: #e8e4dc;
+  --text-secondary: #9a9590;
+  --text-muted: #5e5955;
+  --accent: #c9853a;
+  --accent-dim: #8a5a28;
+  --danger-red: #b84233;
+  --border-faint: rgba(200,170,130,0.08);
+  --border-hover: rgba(200,170,130,0.2);
+  --card-bg: rgba(255,255,255,0.015);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+#spark-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ============ NAV ============ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to bottom, rgba(10,10,15,0.95) 0%, rgba(10,10,15,0) 100%);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: padding 0.4s ease, background 0.4s ease;
+}
+
+nav.scrolled {
+  padding: 0.8rem 3rem;
+  background: rgba(10,10,15,0.96);
+}
+
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.nav-logo span { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover { color: var(--spark-gold); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-links a.active { color: var(--spark-gold); }
+.nav-links a.active::after { width: 100%; }
+
+/* ============ MAIN ============ */
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 7rem 3rem 6rem;
+}
+
+/* ============ HERO ============ */
+.hero {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: fadeUp 1.2s ease-out both;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--text-primary);
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--spark-gold);
+  font-weight: 400;
+}
+
+.hero p.lede {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin: 1.5rem auto 0;
+  line-height: 1.5;
+}
+
+/* ============ STEP OVERVIEW ============ */
+.overview {
+  max-width: 760px;
+  margin: 3.5rem auto 0;
+  text-align: left;
+  animation: fadeUp 1.2s ease-out 0.3s both;
+}
+
+.overview-tag {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  text-align: center;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.overview-tag::before,
+.overview-tag::after {
+  content: '';
+  flex: 0 0 40px;
+  height: 1px;
+  background: var(--accent-dim);
+}
+
+.overview-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.overview-item {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 1.5rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--border-faint);
+  align-items: baseline;
+}
+
+.overview-item:first-child { border-top: 1px solid var(--border-faint); }
+
+.overview-num {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--accent);
+  line-height: 1;
+  text-align: right;
+}
+
+.overview-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.overview-title {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  font-style: italic;
+}
+
+.overview-desc {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ============ SECTION LABEL ============ */
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section-label::before {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--accent-dim);
+}
+
+/* ============ STEPPER ============ */
+.stepper {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-top: 1px solid var(--border-faint);
+  border-bottom: 1px solid var(--border-faint);
+  margin-bottom: 3.5rem;
+}
+
+.step-tab {
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--border-faint);
+  border-bottom: 1px solid transparent;
+  padding: 1.25rem 0.6rem;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  color: inherit;
+  font: inherit;
+}
+
+.step-tab:last-child { border-right: none; }
+
+.step-tab:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.step-tab.active {
+  background: rgba(232,168,56,0.04);
+  border-bottom-color: var(--spark-gold);
+}
+
+.step-num {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.step-tab.active .step-num { color: var(--spark-gold); }
+
+.step-label {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--text-secondary);
+  line-height: 1.2;
+}
+
+.step-tab.active .step-label { color: var(--text-primary); }
+
+/* ============ STEP HEADERS ============ */
+.step-h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin-bottom: 0.8rem;
+}
+
+.step-h2 em {
+  font-style: italic;
+  color: var(--spark-gold);
+}
+
+.step-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin-bottom: 3rem;
+  line-height: 1.7;
+}
+
+.counter {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 3rem;
+  margin-top: -2rem;
+}
+
+.counter.full { color: var(--spark-gold); }
+
+/* ============ CARDS ============ */
+.card {
+  border: 1px solid var(--border-faint);
+  background: var(--card-bg);
+  position: relative;
+  transition: border-color 0.4s, background 0.4s, transform 0.4s;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--spark-gold), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.card.selected {
+  border-color: rgba(232,168,56,0.35);
+  background: rgba(232,168,56,0.04);
+  transform: none;
+}
+
+.card.selected::before { opacity: 1; }
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* ============ CHECKBOX ============ */
+.checkbox {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--accent-dim);
+  background: transparent;
+  color: var(--spark-gold);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  line-height: 1;
+  padding: 0;
+}
+
+.checkbox.checked {
+  border-color: var(--spark-gold);
+  background: rgba(232,168,56,0.12);
+}
+
+.checkbox:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+/* ============ READING ROW ============ */
+.reading-row { padding: 1.6rem 1.8rem; }
+
+.reading-inner {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+}
+
+.reading-body { flex: 1; min-width: 0; }
+
+.reading-title {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.reading-meta {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.reading-note {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-top: 0.7rem;
+  line-height: 1.55;
+}
+
+.reading-link {
+  display: inline-block;
+  margin-top: 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-dim);
+  padding-bottom: 2px;
+  transition: color 0.3s;
+}
+
+.reading-link:hover { color: var(--spark-gold); }
+
+/* ============ TOPIC HEADER ============ */
+.topic-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  margin-top: 3.5rem;
+}
+
+.topic-glyph {
+  font-size: 1.1rem;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.topic-name {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+}
+
+.topic-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--border-faint);
+}
+
+/* ============ UNIT CARD ============ */
+.unit-card { padding: 2rem 2.2rem; }
+
+.unit-inner {
+  display: flex;
+  gap: 1.4rem;
+  align-items: flex-start;
+}
+
+.unit-body { flex: 1; min-width: 0; }
+
+.unit-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin-bottom: 8px;
+}
+
+.unit-glyph {
+  font-size: 1.3rem;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.unit-title {
+  font-family: var(--serif);
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.15;
+}
+
+.unit-descriptor {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--spark-gold);
+  font-weight: 300;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.unit-summary {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.unit-toggle {
+  margin-top: 1.2rem;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s;
+}
+
+.unit-toggle:hover { color: var(--spark-gold); }
+
+.unit-detail {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-faint);
+  display: none;
+}
+
+.unit-detail.open { display: block; }
+
+.detail-tag {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.detail-resolution {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--danger-red);
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.week-block { margin-bottom: 1.4rem; }
+
+.week-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 6px;
+}
+
+.week-roman {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.week-num {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+.week-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+}
+
+.reading-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0 1rem;
+}
+
+.reading-list li {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.reading-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+.activities {
+  margin-top: 0.4rem;
+  margin-left: 1rem;
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+
+/* ============ ORDERING ============ */
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.order-row {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  border: 1px solid var(--border-faint);
+  background: var(--card-bg);
+  padding: 1.4rem 1.6rem;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.order-row:hover {
+  border-color: var(--border-hover);
+}
+
+.order-position {
+  flex-shrink: 0;
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  padding-right: 1rem;
+  border-right: 1px solid var(--border-faint);
+}
+
+.order-position-tag {
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+.order-position-num {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--spark-gold);
+  line-height: 1;
+}
+
+.order-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.order-title {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.order-descriptor {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-top: 0.3rem;
+  line-height: 1.4;
+}
+
+.order-controls {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  justify-content: center;
+}
+
+.order-btn {
+  width: 36px;
+  height: 28px;
+  background: transparent;
+  border: 1px solid var(--accent-dim);
+  color: var(--accent);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  transition: all 0.25s;
+  padding: 0;
+}
+
+.order-btn:hover:not(:disabled) {
+  color: var(--spark-gold);
+  border-color: var(--spark-gold);
+  background: rgba(232,168,56,0.08);
+}
+
+.order-btn:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+/* ============ BUTTONS ============ */
+.btn-row {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  padding: 0.9rem 2rem;
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.btn:hover { color: var(--spark-gold); }
+
+.btn-small {
+  font-size: 0.6rem;
+  padding: 0.5rem 1rem;
+}
+
+.btn-primary {
+  border: 1px solid var(--accent);
+  color: var(--spark-gold);
+}
+
+.btn-primary:hover {
+  background: var(--spark-gold);
+  color: var(--bg);
+  border-color: var(--spark-gold);
+}
+
+.btn-primary:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.btn-primary:disabled:hover {
+  background: transparent;
+  color: var(--spark-gold);
+}
+
+.hero-cta {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+/* ============ PREVIEW ============ */
+.preview-card { padding: 3rem 3rem 2.5rem; }
+
+.preview-head {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.preview-tag {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.preview-title {
+  font-family: var(--serif);
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--text-primary);
+  line-height: 1.05;
+}
+
+.preview-title em {
+  color: var(--spark-gold);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.preview-block { margin-bottom: 2.5rem; }
+
+.preview-block-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border-faint);
+  flex-wrap: wrap;
+}
+
+.preview-week {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+}
+
+.preview-block-title {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-primary);
+}
+
+.preview-body { padding-left: 0.5rem; }
+
+.preview-empty {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.preview-warmup {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+}
+
+.preview-warmup strong { color: var(--text-primary); font-weight: 500; }
+.preview-warmup em { font-style: italic; }
+
+.preview-descriptor {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--spark-gold);
+  margin-bottom: 1rem;
+}
+
+.preview-week-row { margin-bottom: 0.9rem; }
+
+.preview-week-tag {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+.preview-resolution {
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border-faint);
+}
+
+.preview-resolution-tag {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  margin-right: 0.6rem;
+}
+
+.preview-resolution-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--danger-red);
+}
+
+.preview-debrief-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.preview-debrief-list li {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  padding-left: 1rem;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.preview-debrief-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+.preview-debrief-list strong { color: var(--text-primary); font-weight: 500; }
+.preview-debrief-list em { font-style: italic; }
+
+/* ============ FOOTER ============ */
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border-faint);
+  padding: 4rem 3rem 3rem;
+  margin-top: 4rem;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.footer-brand span { color: var(--accent); }
+
+.footer-inst {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.footer-inst a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-inst a:hover { color: var(--accent); }
+
+.footer-right { text-align: right; }
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 0.5rem;
+  justify-content: flex-end;
+}
+
+.footer-links a {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover { color: var(--accent); }
+
+.footer-copy {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.step-section { animation: fadeUp 0.6s ease-out both; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  main { padding: 7rem 1.5rem 4rem; }
+  .stepper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .stepper .step-tab:nth-child(3) { border-right: none; }
+  .stepper .step-tab:nth-child(1),
+  .stepper .step-tab:nth-child(2),
+  .stepper .step-tab:nth-child(3) {
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .preview-card { padding: 2rem 1.5rem; }
+  .btn-row { flex-direction: column; gap: 1.5rem; align-items: stretch; }
+  .btn-row .btn { text-align: center; justify-content: center; }
+  .footer-inner { flex-direction: column; }
+  .footer-right { text-align: left; }
+  .footer-links { justify-content: flex-start; }
+  .overview-item { grid-template-columns: 40px 1fr; gap: 1rem; }
+}
+
+@media (max-width: 600px) {
+  .stepper { grid-template-columns: 1fr; }
+  .stepper .step-tab { border-right: none; border-bottom: 1px solid var(--border-faint); }
+  .stepper .step-tab:last-child { border-bottom: none; }
+  .order-position { width: 60px; }
+}
+
+/* ============ PRINT ============ */
+@media print {
+  #spark-canvas, nav, .stepper, .btn-row, .step-section > .section-label, .step-section > .step-h2, .step-section > .step-desc, footer, .hero, .overview { display: none !important; }
+  body { background: white; color: black; }
+  main { padding: 1rem; }
+  .preview-card { border: none; padding: 0; background: transparent; }
+  .preview-card::before { display: none; }
+  .preview-title, .preview-block-title, .preview-warmup, .preview-debrief-list li, .week-title { color: black; }
+  .preview-descriptor, .preview-resolution-text, .preview-title em, .unit-descriptor { color: #555; }
+  .reading-list li, .preview-week-tag, .preview-block-head { color: #333; border-color: #ccc; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="spark-canvas"></canvas>
+
+<nav id="main-nav">
+  <a href="../habits/" class="nav-logo">The Habits of <span>Discourse</span></a>
+  <ul class="nav-links">
+    <li><a href="../habits/#about">About</a></li>
+    <li><a href="../habits/#dangerous-ideas">Dangerous Ideas</a></li>
+    <li><a href="../habits/#events">Events</a></li>
+    <li><a href="../habits/#team">Team</a></li>
+    <li><a href="./" class="active">Syllabus Builder</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div id="hero-section"></div>
+  <div class="stepper" id="stepper"></div>
+  <div id="step-content"></div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">The Habits of <span>Discourse</span></div>
+      <div class="footer-inst">
+        <a href="https://www.chapman.edu/research/institutes-and-centers/smith-institute/" target="_blank" rel="noopener">Smith Institute for Political Economy &amp; Philosophy</a><br>
+        Chapman University · Orange, California
+      </div>
+    </div>
+    <div class="footer-right">
+      <div class="footer-links">
+        <a href="../habits/#about">About</a>
+        <a href="../habits/#dangerous-ideas">Courses</a>
+        <a href="../habits/#events">Events</a>
+        <a href="../habits/#team">Team</a>
+      </div>
+      <div class="footer-copy">Funded by the Arthur Vining Davis Foundations, 2026–2029</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// =============================================================================
+// DATA
+// =============================================================================
+const WARMUP_READINGS = [
+  { id: "mill-on-liberty", title: "On Liberty, Ch. 2: Of the Liberty of Thought and Discussion", author: "John Stuart Mill", year: 1859, note: "The canonical defense of free discussion. Often split across two class meetings (preface, then remainder).", link: "https://www.gutenberg.org/files/34901/34901-h/34901-h.htm" },
+  { id: "douglass-plea", title: "A Plea for Free Speech in Boston", author: "Frederick Douglass", year: 1860, note: "Short, urgent, and grounded in the political stakes of speech. Pairs well with Mill.", link: "https://teachingamericanhistory.org/document/a-plea-for-free-speech-in-boston/" },
+  { id: "milton-areopagitica", title: "Areopagitica (excerpts)", author: "John Milton", year: 1644, note: "Earlier and more rhetorically florid than Mill; an argument against pre-publication licensing.", link: "https://www.gutenberg.org/cache/epub/608/pg608.html" }
+];
+
+const DEBRIEF_READINGS = [
+  { id: "mcardle-unbiased", title: "What Does 'Unbiased' Mean in the Digital World?", author: "Megan McArdle (with Russ Roberts)", year: 2024, note: "EconTalk conversation. Used in the 2024 syllabus as a closing reflection on epistemic standards online.", link: "https://www.econtalk.org/what-does-unbiased-mean-in-the-digital-world-with-megan-mcardle/" },
+  { id: "campus-free-speech", title: "Campus Free Speech (current state of)", author: "Various", year: null, note: "An open-ended final session. In 2025, paired with the Chapman FIRE Rankings discussion.", link: null },
+  { id: "fire-rankings", title: "Chapman FIRE Rankings: A Conversation with Jerry Price", author: "The Panther", year: 2025, note: "Local case study for assessing the climate of free inquiry on a specific campus.", link: "https://www.thepanthernewspaper.org/news/2025-fire-rankings-a-conversation-with-jerry-price" },
+  { id: "inboden-2025", title: "Inboden 2025", author: "Inboden", year: 2025, note: "Closing reading used in the 2025 syllabus. Bibliographic details to be confirmed by instructor.", link: null }
+];
+
+const UNITS = [
+  { id: "meritocracy", topic: "Equality & Opportunity", title: "Meritocracy", descriptor: "Does meritocracy promote social mobility, or entrench inequality?", summary: "Students examine the case for meritocracy as a fair allocator of opportunity alongside critiques that the meritocratic ideal masks (or even produces) durable hierarchies. Readings pair classical defenses with contemporary attacks from both the left and the right.", debateResolution: "That the so-called 'meritocracy' reduces social mobility.",
+    weeks: [
+      { week: 1, title: "The case for meritocracy", readings: ["Wooldridge, Aristocracy of Talent — Intro & Ch. 1–3", "Wooldridge, Aristocracy of Talent — Ch. 10–12"], activities: ["Argument Map"] },
+      { week: 2, title: "The cult of smart", readings: ["DeBoer, The Cult of Smart — Intro & Ch. 1–2", "Stephens-Davidowitz interview (Modern Wisdom)", "DeBoer, The Cult of Smart — Ch. 3 & 6"], activities: ["Argument Map"] },
+      { week: 3, title: "Adjudicating the dispute", readings: ["Alexander, 'Book Review: The Cult of Smart' (Astral Codex Ten, 2021)", "Hymowitz, 'Crucible of the Talents' (City Journal, 2021)", "DeBoer & Callard, 'Meritocracy' (discussion)"], activities: ["Data Workshop", "Debate Club"] }
+    ]
+  },
+  { id: "colonialism", topic: "History & Power", title: "The Evils and Blessings of Colonization", descriptor: "Were there ever forms of colonization that produced net benefits — and how should we weigh the question?", summary: "A confrontation with one of the most morally charged questions in modern history. Readings span moral indictments, empirical studies of colonial economic legacies, and natural-experiment econometrics.", debateResolution: "That some forms of colonization have been, on balance, beneficial.",
+    weeks: [
+      { week: 1, title: "The moral and economic indictment", readings: ["Robinson, 'A Quick Reminder of Why Colonialism Was Bad' (Current Affairs, 2017)", "Acemoglu, 'The Economic Impact of Colonialism' (VoxEU, 2017)", "Acemoglu, Johnson & Robinson, 'The Colonial Origins of Comparative Development' (AER, 2001)"], activities: ["Argument Map", "Data Workshop"] },
+      { week: 2, title: "Cases and counter-cases", readings: ["Marein, 'Economic Development in Puerto Rico after US Annexation' (2020)", "Moreno-Lázaro response (2024)", "Feyrer & Sacerdote, 'Colonialism and Modern Income: Islands as Natural Experiments' (RES, 2009)", "Easterly & Levine, 'The European Origins of Economic Development' (JEG, 2016)"], activities: ["Argument Map", "Visitor (e.g., Marein)"] },
+      { week: 3, title: "Reversal of fortune", readings: ["Feir, Gillezeau & Jones, 'The Slaughter of the Bison and Reversal of Fortunes on the Great Plains' (RES, 2024)", "Smith & Roberts, 'Can a Nation Plunder Its Way to Wealth?' (EconTalk, 2024)"], activities: ["Debate Club"] }
+    ]
+  },
+  { id: "voting-democracy", topic: "Politics & Society", title: "How Much Democracy?", descriptor: "Are our political problems the result of too little democracy — or too much?", summary: "Students weigh universal-civic-duty proposals against arguments for technocratic restraint. Readings include statistical work on the value of an individual vote and the case for '10% less democracy.'", debateResolution: "That many of our social problems stem from too much, rather than too little, democracy.",
+    weeks: [
+      { week: 1, title: "The case for more democracy", readings: ["Brookings Institution, 'Lift Every Voice: The Urgency of Universal Civic Duty Voting' (2020)", "Jones, 10% Less Democracy — Intro & Ch. 1–2"], activities: ["Argument Map"] },
+      { week: 2, title: "The probability your vote matters", readings: ["Gelman, Silver & Edlin, 'What Is the Probability Your Vote Will Make a Difference?' (Economic Inquiry, 2012)", "Jones, 10% Less Democracy — Ch. 3–4", "Jones, 10% Less Democracy — Ch. 5–6"], activities: ["Data Workshop", "Argument Map"] },
+      { week: 3, title: "Less democracy?", readings: ["Caplan, 'How Much Revenue Could You Raise with a Poll Tax?' (2024)", "Jones, 10% Less Democracy — Ch. 7–9 & Conclusion", "Jones & Cowen, 'Democracy (More or Less?)' (Conversations with Tyler)"], activities: ["Visitor (e.g., Garett Jones)", "Debate Club"] }
+    ]
+  },
+  { id: "immigration", topic: "Politics & Society", title: "Immigration", descriptor: "Do rich countries have a moral obligation to allow immigration from poorer ones?", summary: "Students engage both economic and cultural-political dimensions of the immigration debate, hearing from authors who have argued for largely open borders, restrictionist positions, and the cultural-cohesion view in between.", debateResolution: "That rich countries have a moral obligation to allow immigration from poorer countries.",
+    weeks: [
+      { week: 1, title: "Demography and identity", readings: ["Cowen interviews Kaufmann on Whiteshift (Conversations with Tyler)", "Alesina et al. (2023)"], activities: ["Argument Map"] },
+      { week: 2, title: "The economics of immigration", readings: ["Roberts interviews Abramitsky & Boustan on Streets of Gold (EconTalk)", "Roberts interviews Borjas on We Wanted Workers (EconTalk)"], activities: ["Data Workshop"] },
+      { week: 3, title: "Anywheres, somewheres, and culture transplants", readings: ["Goodhart (2004)", "Gillam interviews Garett Jones on The Culture Transplant"], activities: ["Argument Map", "Debate Club"] }
+    ]
+  },
+  { id: "genoeconomics", topic: "Science & Ethics", title: "Genoeconomics and Criminal Justice", descriptor: "Should courts consider genetic predispositions when making sentencing decisions?", summary: "An emerging body of behavior-genetic research has begun to identify polygenic correlates of impulsivity and other traits relevant to criminal behavior. Students assess what such findings imply (and don't imply) for legal responsibility and sentencing.", debateResolution: "That courts should be permitted to consider genetic predisposition toward impulsivity in determining sentences.",
+    weeks: [
+      { week: 1, title: "The genetic lottery", readings: ["Zimmer interviews Harden on The Genetic Lottery", "(Library research session)"], activities: ["Library meeting"] },
+      { week: 2, title: "Heritability and life outcomes", readings: ["Epper et al. (PNAS, 2022)", "Cesarini et al. (2023)"], activities: ["Data Workshop"] },
+      { week: 3, title: "Genes, environments, and policy", readings: ["Azevedo et al. (2025)", "Biroli et al. (Restud, 2025)"], activities: ["Argument Map", "Debate Club"] }
+    ]
+  },
+  { id: "trans-women-sport", topic: "Gender & Sexuality", title: "Trans Women in Sport", descriptor: "Should trans women compete in women's sport categories?", summary: "Students engage philosophical defenses of full inclusion, gender-critical responses, scientific evidence on athletic performance, and the relevant legal landscape. The unit pairs philosophy and policy with empirical work.", debateResolution: "That trans women should be permitted to compete in women's sport categories.",
+    weeks: [
+      { week: 1, title: "The case for inclusion", readings: ["Ivy & Noah, 'Trans Women in Women's Sports' (The Daily Show)", "Ivy, 'If Ifs and Buts Were Candy and Nuts' (Feminist Philosophy Quarterly, 2021)", "Armstrong & Thompson interview (The Forward Podcast)", "Ivy, 'Trans Women are Women, Sport is a Human Right' (J. Olympic Studies, 2022)", "Christiansen, 'The Negligence of Biological Reality' (J. Olympic Studies)"], activities: [] },
+      { week: 2, title: "Gender-critical responses", readings: ["Lawford-Smith, Sex Matters (selections, 2022)", "Dembroff, 'Escaping the Natural Attitude about Gender' (Philosophical Studies, 2021)"], activities: ["Visitor (e.g., Lawford-Smith)"] },
+      { week: 3, title: "Law and public debate", readings: ["Dept. of Education v. Louisiana, 603 U.S. ___ (2024)", "'Debate: Is Sex Binary?' (MIT Free Speech Alliance)"], activities: ["Debate Club"] }
+    ]
+  },
+  { id: "gender-affirming-care", topic: "Gender & Sexuality", title: "Gender-Affirming Care for Minors", descriptor: "Should minors have access to gender-affirming hormone therapies?", summary: "Students examine clinical, ethical, and legal perspectives on gender-affirming care for adolescents. Readings include peer-reviewed clinical literature, public-facing debates, and the recent Skrmetti decision.", debateResolution: "That the government should disallow the provision of gender-affirming care to minors.",
+    weeks: [
+      { week: 1, title: "Clinical context", readings: ["Green et al. (2022)", "NY Times Daily, 'The Protocol' (ep. 1, 2025)", "Clayton (2025)", "Lovett/Maher debate (video)"], activities: ["Argument Map"] },
+      { week: 2, title: "Informed consent", readings: ["Levine, Abbruzzese & Mason, 'Reconsidering Informed Consent for Trans-Identified Children, Adolescents, and Young Adults' (2022)", "Maher/Cryer debate (video)", "Latham, 'Puberty Blockers for Children: Can They Consent?' (The New Bioethics, 2022)"], activities: ["Argument Map"] },
+      { week: 3, title: "Law and policy", readings: ["United States v. Skrmetti, 605 U.S. ___ (2025)"], activities: ["Data Workshop", "Debate Club"] }
+    ]
+  },
+  { id: "abundance-decadence", topic: "Culture & Civilization", title: "Abundance vs. Excess", descriptor: "Does abundance inevitably give way to decadence?", summary: "Students put two recent and rivalrous books in conversation: a defense of an 'abundance agenda' and an extended cultural diagnosis of Western decadence. The unit assesses what we mean by progress and what its costs may be.", debateResolution: "That abundance inevitably gives way to decadence.",
+    weeks: [
+      { week: 1, title: "Abundance", readings: ["Klein & Thompson, Abundance — Intro & Ch. 1", "Abundance — Ch. 2–3", "Abundance — Ch. 4–5 & Conclusion"], activities: ["Argument Map"] },
+      { week: 2, title: "Decadence", readings: ["Douthat, The Decadent Society — Intro & Ch. 1–3", "The Decadent Society — Ch. 4–7"], activities: ["Argument Map"] },
+      { week: 3, title: "Resolution", readings: ["The Decadent Society — Ch. 8–11"], activities: ["Data Workshop", "Debate Club"] }
+    ]
+  }
+];
+
+const TOPIC_GLYPHS = {
+  "Equality & Opportunity": "◯",
+  "History & Power": "△",
+  "Politics & Society": "⬡",
+  "Science & Ethics": "◇",
+  "Gender & Sexuality": "▢",
+  "Culture & Civilization": "✦"
+};
+
+const TOPIC_ORDER = ["Equality & Opportunity", "History & Power", "Politics & Society", "Science & Ethics", "Gender & Sexuality", "Culture & Civilization"];
+
+const UNITS_BY_TOPIC = UNITS.reduce((acc, u) => {
+  (acc[u.topic] = acc[u.topic] || []).push(u);
+  return acc;
+}, {});
+
+const STEP_OVERVIEW = [
+  { roman: "I", title: "Intro Week", desc: "Choose an iconic warm-up reading on free speech and open inquiry." },
+  { roman: "II", title: "Select Modules", desc: "Pick four three-week modules on contested questions you want students to engage." },
+  { roman: "III", title: "Order Modules", desc: "Decide which module comes first, second, third, and fourth in the semester." },
+  { roman: "IV", title: "Debrief Week", desc: "Choose readings to close the course with metareflection on free inquiry." },
+  { roman: "V", title: "Preview", desc: "Review your composed 14-week syllabus and print or save as PDF." }
+];
+
+// =============================================================================
+// STATE
+// =============================================================================
+const STORAGE_KEY = "habits_syllabus_draft_v2";
+
+const state = {
+  step: 1,
+  warmupId: null,
+  unitIds: [],     // selected unit IDs (any order, used in step 2)
+  unitOrder: [],   // ordered unit IDs (used in step 3 onward)
+  debriefIds: [],
+  expandedUnitId: null
+};
+
+function saveDraft() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      step: state.step,
+      warmupId: state.warmupId,
+      unitIds: state.unitIds,
+      unitOrder: state.unitOrder,
+      debriefIds: state.debriefIds
+    }));
+  } catch (e) {}
+}
+
+function loadDraft() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const d = JSON.parse(raw);
+    if (d.warmupId) state.warmupId = d.warmupId;
+    if (Array.isArray(d.unitIds)) state.unitIds = d.unitIds;
+    if (Array.isArray(d.unitOrder)) state.unitOrder = d.unitOrder;
+    if (Array.isArray(d.debriefIds)) state.debriefIds = d.debriefIds;
+    if (d.step) state.step = d.step;
+  } catch (e) {}
+}
+
+function clearDraft() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+}
+
+// Reconcile unitOrder with unitIds: unitOrder must contain exactly the
+// items in unitIds, preserving prior ordering for items still selected.
+function reconcileOrder() {
+  state.unitOrder = state.unitOrder.filter(id => state.unitIds.includes(id));
+  state.unitIds.forEach(id => {
+    if (!state.unitOrder.includes(id)) state.unitOrder.push(id);
+  });
+}
+
+function valid() {
+  return [
+    state.warmupId !== null,             // step 1 done
+    state.unitIds.length === 4,          // step 2 done
+    state.unitIds.length === 4 && state.unitOrder.length === 4, // step 3 done
+    state.debriefIds.length > 0          // step 4 done
+  ];
+}
+
+// =============================================================================
+// HELPERS
+// =============================================================================
+function el(tag, props, ...children) {
+  props = props || {};
+  const node = document.createElement(tag);
+  for (const k in props) {
+    if (k === 'class') node.className = props[k];
+    else if (k === 'html') node.innerHTML = props[k];
+    else if (k === 'style') node.setAttribute('style', props[k]);
+    else if (k.startsWith('on')) node.addEventListener(k.slice(2).toLowerCase(), props[k]);
+    else if (k === 'href' || k === 'target' || k === 'rel') node.setAttribute(k, props[k]);
+    else if (k === 'disabled') { if (props[k]) node.setAttribute('disabled', ''); }
+    else node[k] = props[k];
+  }
+  children.flat(Infinity).forEach(c => {
+    if (c == null || c === false) return;
+    if (typeof c === 'string' || typeof c === 'number') node.appendChild(document.createTextNode(c));
+    else node.appendChild(c);
+  });
+  return node;
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+}
+
+// =============================================================================
+// COMPONENTS
+// =============================================================================
+function checkbox(checked, disabled, onclick) {
+  return el('button', {
+    class: 'checkbox' + (checked ? ' checked' : ''),
+    disabled: disabled && !checked,
+    onclick
+  }, checked ? '✓' : '');
+}
+
+function readingRow(reading, checked, disabled, onToggle) {
+  const inner = el('div', { class: 'reading-inner' },
+    el('div', { style: 'padding-top: 4px;' }, checkbox(checked, disabled, onToggle)),
+    el('div', { class: 'reading-body' },
+      el('div', { class: 'reading-title' }, reading.title),
+      el('div', { class: 'reading-meta' }, reading.author + (reading.year ? ' · ' + reading.year : '')),
+      reading.note ? el('div', { class: 'reading-note' }, reading.note) : null,
+      reading.link ? el('a', { class: 'reading-link', href: reading.link, target: '_blank', rel: 'noopener noreferrer' }, 'View source ↗') : null
+    )
+  );
+  return el('div', { class: 'card reading-row' + (checked ? ' selected' : '') }, inner);
+}
+
+function unitCard(unit, checked, disabled, onToggle, expanded, onExpand) {
+  const glyph = TOPIC_GLYPHS[unit.topic] || '◯';
+
+  const detailChildren = [];
+  detailChildren.push(el('div', { class: 'detail-tag' }, 'Debate Resolution'));
+  detailChildren.push(el('div', { class: 'detail-resolution' }, '"' + unit.debateResolution + '"'));
+  unit.weeks.forEach(wk => {
+    const weekDiv = el('div', { class: 'week-block' },
+      el('div', { class: 'week-head' },
+        el('span', { class: 'week-roman' }, ['I','II','III'][wk.week - 1]),
+        el('span', { class: 'week-num' }, 'Week ' + wk.week),
+        el('span', { class: 'week-title' }, wk.title)
+      ),
+      el('ul', { class: 'reading-list' },
+        wk.readings.map(r => el('li', {}, r))
+      ),
+      wk.activities && wk.activities.length > 0
+        ? el('div', { class: 'activities' }, wk.activities.join(' · '))
+        : null
+    );
+    detailChildren.push(weekDiv);
+  });
+
+  const body = el('div', { class: 'unit-body' },
+    el('div', { class: 'unit-head' },
+      el('span', { class: 'unit-glyph' }, glyph),
+      el('h3', { class: 'unit-title' }, unit.title)
+    ),
+    el('p', { class: 'unit-descriptor' }, unit.descriptor),
+    el('p', { class: 'unit-summary' }, unit.summary),
+    el('button', { class: 'unit-toggle', onclick: onExpand },
+      el('span', { style: 'font-size: 0.7rem;' }, expanded ? '−' : '+'),
+      expanded ? 'Hide unit syllabus' : 'View unit syllabus'
+    ),
+    el('div', { class: 'unit-detail' + (expanded ? ' open' : '') }, detailChildren)
+  );
+
+  return el('div', { class: 'card unit-card' + (checked ? ' selected' : '') },
+    el('div', { class: 'unit-inner' },
+      el('div', { style: 'padding-top: 4px;' }, checkbox(checked, disabled, onToggle)),
+      body
+    )
+  );
+}
+
+function orderRow(unit, position, total, onUp, onDown) {
+  return el('div', { class: 'order-row' },
+    el('div', { class: 'order-position' },
+      el('span', { class: 'order-position-tag' }, 'Module'),
+      el('span', { class: 'order-position-num' }, String(position))
+    ),
+    el('div', { class: 'order-body' },
+      el('div', { class: 'order-title' }, unit.title),
+      el('div', { class: 'order-descriptor' }, unit.descriptor)
+    ),
+    el('div', { class: 'order-controls' },
+      el('button', { class: 'order-btn', disabled: position === 1, onclick: onUp, title: 'Move up' }, '▲'),
+      el('button', { class: 'order-btn', disabled: position === total, onclick: onDown, title: 'Move down' }, '▼')
+    )
+  );
+}
+
+// =============================================================================
+// HERO + STEPPER
+// =============================================================================
+function renderHero() {
+  const container = document.getElementById('hero-section');
+  container.innerHTML = '';
+
+  // Show full hero (with overview) only on step 1; collapsed on later steps.
+  if (state.step !== 1) {
+    container.appendChild(el('div', { class: 'hero', style: 'margin-bottom: 2.5rem;' },
+      el('h1', { html: '<em>Dangerous Ideas</em> Syllabus Builder' })
+    ));
+    return;
+  }
+
+  const hero = el('div', { class: 'hero' },
+    el('h1', { html: '<em>Dangerous Ideas</em> Syllabus Builder' }),
+    el('p', { class: 'lede' }, 'Compose your own fourteen-week course on the model of Kimbrough & McDavid: an iconic Intro Week reading, four three-week modules on contested questions, and a closing Debrief Week.')
+  );
+
+  const overview = el('div', { class: 'overview' },
+    el('div', { class: 'overview-tag' }, 'Five Steps'),
+    el('ol', { class: 'overview-list' },
+      STEP_OVERVIEW.map(s => el('li', { class: 'overview-item' },
+        el('span', { class: 'overview-num' }, s.roman),
+        el('div', { class: 'overview-text' },
+          el('span', { class: 'overview-title' }, s.title),
+          el('span', { class: 'overview-desc' }, s.desc)
+        )
+      ))
+    ),
+    el('div', { class: 'hero-cta' },
+      el('button', {
+        class: 'btn btn-primary',
+        onclick: () => {
+          // Scroll to first step section
+          document.getElementById('step-content').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 'Begin →')
+    )
+  );
+
+  container.appendChild(hero);
+  container.appendChild(overview);
+}
+
+function renderStepper() {
+  const container = document.getElementById('stepper');
+  container.innerHTML = '';
+  const items = [
+    { n: 1, label: "Intro Week" },
+    { n: 2, label: "Select Modules" },
+    { n: 3, label: "Order Modules" },
+    { n: 4, label: "Debrief Week" },
+    { n: 5, label: "Preview" }
+  ];
+  const v = valid();
+  items.forEach(it => {
+    const reachable = it.n === 1 || v[it.n - 2];
+    const btn = el('button', {
+      class: 'step-tab' + (state.step === it.n ? ' active' : ''),
+      disabled: !reachable,
+      onclick: () => { if (reachable) { state.step = it.n; saveDraft(); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }
+    },
+      el('span', { class: 'step-num' }, ['I','II','III','IV','V'][it.n - 1]),
+      el('span', { class: 'step-label' }, it.label)
+    );
+    container.appendChild(btn);
+  });
+}
+
+// =============================================================================
+// STEP RENDERERS
+// =============================================================================
+function renderStep1() {
+  const list = el('div', { class: 'card-list' });
+  WARMUP_READINGS.forEach(r => {
+    list.appendChild(readingRow(r, state.warmupId === r.id, false, () => {
+      state.warmupId = state.warmupId === r.id ? null : r.id;
+      saveDraft();
+      render();
+    }));
+  });
+
+  return el('section', { class: 'step-section' },
+    el('div', { class: 'section-label' }, 'Step One · Intro Week'),
+    el('h2', { class: 'step-h2', html: 'Choose an <em>Intro Week</em> reading.' }),
+    el('p', { class: 'step-desc' }, 'Open the semester with an iconic defense of free speech and open inquiry. Pick one — the text can be split across two class meetings.'),
+    list,
+    el('div', { class: 'btn-row' },
+      el('button', {
+        class: 'btn btn-small',
+        onclick: () => {
+          if (!confirm('Clear your current draft and start over?')) return;
+          state.warmupId = null;
+          state.unitIds = [];
+          state.unitOrder = [];
+          state.debriefIds = [];
+          state.step = 1;
+          state.expandedUnitId = null;
+          clearDraft();
+          render();
+        }
+      }, '↻ Reset Draft'),
+      el('button', {
+        class: 'btn btn-primary',
+        disabled: !valid()[0],
+        onclick: () => { state.step = 2; saveDraft(); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+      }, 'Continue →')
+    )
+  );
+}
+
+function renderStep2() {
+  const sec = el('section', { class: 'step-section' },
+    el('div', { class: 'section-label' }, 'Step Two · Select Modules'),
+    el('h2', { class: 'step-h2', html: 'Select <em>four</em> three-week modules.' }),
+    el('p', { class: 'step-desc' }, 'Each module devotes three weeks to a single contested issue, culminating in an Oxford-rules debate. You will order them in the next step.'),
+    el('div', { class: 'counter' + (state.unitIds.length === 4 ? ' full' : '') },
+      state.unitIds.length + ' of 4 selected' + (state.unitIds.length === 4 ? ' · maximum reached — uncheck one to swap' : '')
+    )
+  );
+
+  TOPIC_ORDER.filter(t => UNITS_BY_TOPIC[t]).forEach(topic => {
+    sec.appendChild(el('div', { class: 'topic-header' },
+      el('span', { class: 'topic-glyph' }, TOPIC_GLYPHS[topic]),
+      el('span', { class: 'topic-name' }, topic),
+      el('span', { class: 'topic-rule' })
+    ));
+    const list = el('div', { class: 'card-list' });
+    UNITS_BY_TOPIC[topic].forEach(u => {
+      const checked = state.unitIds.includes(u.id);
+      const disabled = state.unitIds.length >= 4;
+      const expanded = state.expandedUnitId === u.id;
+      list.appendChild(unitCard(u, checked, disabled,
+        () => {
+          if (checked) state.unitIds = state.unitIds.filter(x => x !== u.id);
+          else if (state.unitIds.length < 4) state.unitIds = [...state.unitIds, u.id];
+          reconcileOrder();
+          saveDraft();
+          render();
+        },
+        expanded,
+        () => {
+          state.expandedUnitId = expanded ? null : u.id;
+          render();
+        }
+      ));
+    });
+    sec.appendChild(list);
+  });
+
+  sec.appendChild(el('div', { class: 'btn-row' },
+    el('button', { class: 'btn btn-small', onclick: () => { state.step = 1; saveDraft(); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }, '← Back'),
+    el('button', {
+      class: 'btn btn-primary',
+      disabled: !valid()[1],
+      onclick: () => { state.step = 3; saveDraft(); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    }, 'Continue →')
+  ));
+
+  return sec;
+}
+
+function renderStep3() {
+  // Make sure unitOrder is in sync (defensive)
+  reconcileOrder();
+
+  const list = el('div', { class: 'order-list' });
+  state.unitOrder.forEach((id, idx) => {
+    const u = UNITS.find(x => x.id === id);
+    if (!u) return;
+    list.appendChild(orderRow(u, idx + 1, state.unitOrder.length,
+      () => {
+        if (idx === 0) return;
+        const arr = [...state.unitOrder];
+        [arr[idx - 1], arr[idx]] = [arr[idx], arr[idx - 1]];
+        state.unitOrder = arr;
+        saveDraft();
+        render();
+      },
+      () => {
+        if (idx === state.unitOrder.length - 1) return;
+        const arr = [...state.unitOrder];
+        [arr[idx], arr[idx + 1]] = [arr[idx + 1], arr[idx]];
+        state.unitOrder = arr;
+        saveDraft();
+        render();
+      }
+    ));
+  });
+
+  return el('section', { class: 'step-section' },
+    el('div', { class: 'section-label' }, 'Step Three · Order Modules'),
+    el('h2', { class: 'step-h2', html: 'Set the <em>order</em> of your modules.' }),
+    el('p', { class: 'step-desc' }, 'Use the arrows to arrange your four modules in the order they will be taught. The first module begins in Week 2 and the fourth ends in Week 13.'),
+    list,
+    el('div', { class: 'btn-row' },
+      el('button', { class: 'btn btn-small', onclick: () => { state.step = 2; saveDraft(); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }, '← Back'),
+      el('button', {
+        class: 'btn btn-primary',
+        disabled: !valid()[2],
+        onclick: () => { state.step = 4; saveDraft(); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+      }, 'Continue →')
+    )
+  );
+}
+
+function renderStep4() {
+  const list = el('div', { class: 'card-list' });
+  DEBRIEF_READINGS.forEach(r => {
+    list.appendChild(readingRow(r, state.debriefIds.includes(r.id), false, () => {
+      if (state.debriefIds.includes(r.id)) state.debriefIds = state.debriefIds.filter(x => x !== r.id);
+      else state.debriefIds = [...state.debriefIds, r.id];
+      saveDraft();
+      render();
+    }));
+  });
+
+  return el('section', { class: 'step-section' },
+    el('div', { class: 'section-label' }, 'Step Four · Last Week of the Semester'),
+    el('h2', { class: 'step-h2', html: 'Choose readings for the <em>Debrief Week</em>.' }),
+    el('p', { class: 'step-desc' }, 'Close the course with metareflection on the climate for free inquiry and the methods practiced over the semester. Select one or more.'),
+    list,
+    el('div', { class: 'btn-row' },
+      el('button', { class: 'btn btn-small', onclick: () => { state.step = 3; saveDraft(); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }, '← Back'),
+      el('button', {
+        class: 'btn btn-primary',
+        disabled: !valid()[3],
+        onclick: () => { state.step = 5; saveDraft(); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+      }, 'Preview Syllabus →')
+    )
+  );
+}
+
+function previewBlock(label, week, body) {
+  return el('div', { class: 'preview-block' },
+    el('div', { class: 'preview-block-head' },
+      el('span', { class: 'preview-week' }, week),
+      el('span', { class: 'preview-block-title' }, label)
+    ),
+    el('div', { class: 'preview-body' }, body)
+  );
+}
+
+function renderStep5() {
+  reconcileOrder();
+  const warmup = WARMUP_READINGS.find(r => r.id === state.warmupId);
+  const orderedUnits = state.unitOrder.map(id => UNITS.find(u => u.id === id)).filter(Boolean);
+  const selectedDebriefs = state.debriefIds.map(id => DEBRIEF_READINGS.find(r => r.id === id)).filter(Boolean);
+
+  const previewCard = el('div', { class: 'card preview-card' });
+
+  previewCard.appendChild(el('div', { class: 'preview-head' },
+    el('div', { class: 'preview-tag' }, '14-Week Course Outline'),
+    el('h2', { class: 'preview-title', html: 'Dangerous <em>Ideas</em>' })
+  ));
+
+  previewCard.appendChild(previewBlock('Intro Week', 'Week 1',
+    warmup
+      ? el('div', { class: 'preview-warmup', html:
+          '<strong>' + escapeHtml(warmup.author) + '</strong>, <em>' + escapeHtml(warmup.title) + '</em>' + (warmup.year ? ' (' + warmup.year + ')' : '')
+        })
+      : el('div', { class: 'preview-empty' }, 'No Intro Week reading selected.')
+  ));
+
+  if (orderedUnits.length === 0) {
+    previewCard.appendChild(previewBlock('Modules', 'Weeks 2–13',
+      el('div', { class: 'preview-empty' }, 'No modules selected.')
+    ));
+  } else {
+    orderedUnits.forEach((u, idx) => {
+      const startWeek = 2 + idx * 3;
+      const endWeek = startWeek + 2;
+      const body = el('div', {});
+      body.appendChild(el('div', { class: 'preview-descriptor' }, u.descriptor));
+      u.weeks.forEach(wk => {
+        const row = el('div', { class: 'preview-week-row' },
+          el('div', { class: 'preview-week-tag' }, 'Week ' + (startWeek + wk.week - 1) + ' · ' + wk.title),
+          el('ul', { class: 'reading-list', style: 'margin-top: 0.4rem;' },
+            wk.readings.map(r => el('li', {}, r))
+          )
+        );
+        body.appendChild(row);
+      });
+      body.appendChild(el('div', { class: 'preview-resolution' },
+        el('span', { class: 'preview-resolution-tag' }, 'Resolution'),
+        el('span', { class: 'preview-resolution-text' }, '"' + u.debateResolution + '"')
+      ));
+      previewCard.appendChild(previewBlock(
+        'Module ' + (idx + 1) + ': ' + u.title,
+        'Weeks ' + startWeek + '–' + endWeek,
+        body
+      ));
+    });
+  }
+
+  previewCard.appendChild(previewBlock('Last Week of the Semester: Debrief Week', 'Week 14',
+    selectedDebriefs.length === 0
+      ? el('div', { class: 'preview-empty' }, 'No Debrief Week readings selected.')
+      : el('ul', { class: 'preview-debrief-list' },
+          selectedDebriefs.map(r => el('li', { html:
+            '<strong>' + escapeHtml(r.author) + '</strong>, <em>' + escapeHtml(r.title) + '</em>' + (r.year ? ' (' + r.year + ')' : '')
+          }))
+        )
+  ));
+
+  return el('section', { class: 'step-section' },
+    el('div', { class: 'section-label' }, 'Step Five · Final'),
+    el('h2', { class: 'step-h2', html: 'Your <em>syllabus</em>.' }),
+    el('p', { class: 'step-desc' }, 'A 14-week skeleton. Edit any step to swap selections; your draft is saved automatically.'),
+    previewCard,
+    el('div', { class: 'btn-row' },
+      el('button', { class: 'btn btn-small', onclick: () => { state.step = 4; saveDraft(); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }, '← Back'),
+      el('button', { class: 'btn btn-primary', onclick: () => window.print() }, 'Print / Save as PDF')
+    )
+  );
+}
+
+function render() {
+  renderHero();
+  renderStepper();
+  const content = document.getElementById('step-content');
+  content.innerHTML = '';
+  if (state.step === 1) content.appendChild(renderStep1());
+  else if (state.step === 2) content.appendChild(renderStep2());
+  else if (state.step === 3) content.appendChild(renderStep3());
+  else if (state.step === 4) content.appendChild(renderStep4());
+  else if (state.step === 5) content.appendChild(renderStep5());
+}
+
+// =============================================================================
+// FIREFLY CANVAS
+// =============================================================================
+const canvas = document.getElementById('spark-canvas');
+const ctx = canvas.getContext('2d');
+let w, h;
+let mouse = { x: -1000, y: -1000 };
+let fireflies = [];
+let time = 0;
+
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+class Firefly {
+  constructor() {
+    this.x = Math.random() * w;
+    this.y = Math.random() * h;
+    this.size = 1 + Math.random() * 2.5;
+    this.angle = Math.random() * Math.PI * 2;
+    this.speed = 0.12 + Math.random() * 0.32;
+    this.turnSpeed = 0.005 + Math.random() * 0.02;
+    this.turnBias = (Math.random() - 0.5) * 0.02;
+    this.glowPhase = Math.random() * Math.PI * 2;
+    this.glowSpeed = 0.014 + Math.random() * 0.012;
+    this.glowStyle = Math.random();
+    this.brightness = 0;
+    this.peakBrightness = 0.4 + Math.random() * 0.6;
+    const c = Math.random();
+    if (c < 0.5) { this.r = 240 + Math.random() * 15; this.g = 180 + Math.random() * 40; this.b = 50 + Math.random() * 40; }
+    else if (c < 0.8) { this.r = 230 + Math.random() * 25; this.g = 140 + Math.random() * 50; this.b = 30 + Math.random() * 30; }
+    else { this.r = 255; this.g = 220 + Math.random() * 30; this.b = 160 + Math.random() * 60; }
+  }
+  update() {
+    this.angle += this.turnBias + Math.sin(time * this.turnSpeed) * 0.03;
+    if (Math.random() < 0.005) this.turnBias = (Math.random() - 0.5) * 0.02;
+    this.x += Math.cos(this.angle) * this.speed;
+    this.y += Math.sin(this.angle) * this.speed;
+    const m = 50;
+    if (this.x < -m) this.x = w + m;
+    if (this.x > w + m) this.x = -m;
+    if (this.y < -m) this.y = h + m;
+    if (this.y > h + m) this.y = -m;
+    const dx = this.x - mouse.x, dy = this.y - mouse.y;
+    const d = Math.sqrt(dx * dx + dy * dy);
+    if (d < 120 && d > 0) {
+      const f = (120 - d) / 120 * 0.3;
+      this.x += (dx / d) * f; this.y += (dy / d) * f;
+    }
+    this.glowPhase += this.glowSpeed;
+    if (this.glowStyle < 0.4) {
+      this.brightness = this.peakBrightness * Math.max(0, Math.sin(this.glowPhase));
+    } else if (this.glowStyle < 0.7) {
+      const c = this.glowPhase % (Math.PI * 2);
+      this.brightness = c < 0.8 ? this.peakBrightness * Math.sin(c / 0.8 * Math.PI) : 0;
+    } else {
+      const c = this.glowPhase % (Math.PI * 3);
+      if (c < 0.5) this.brightness = this.peakBrightness * Math.sin(c / 0.5 * Math.PI);
+      else if (c > 0.8 && c < 1.3) this.brightness = this.peakBrightness * 0.6 * Math.sin((c - 0.8) / 0.5 * Math.PI);
+      else this.brightness *= 0.9;
+    }
+  }
+  draw() {
+    if (this.brightness < 0.02) return;
+    const a = this.brightness;
+    const r = Math.floor(this.r), g = Math.floor(this.g), b = Math.floor(this.b);
+    const gs = this.size * (8 + this.brightness * 6);
+    const og = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, gs);
+    og.addColorStop(0, `rgba(${r},${g},${b},${a * 0.12})`);
+    og.addColorStop(0.4, `rgba(${r},${g},${Math.floor(b * 0.5)},${a * 0.05})`);
+    og.addColorStop(1, 'transparent');
+    ctx.fillStyle = og;
+    ctx.fillRect(this.x - gs, this.y - gs, gs * 2, gs * 2);
+    const isz = this.size * 3;
+    const ig = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, isz);
+    ig.addColorStop(0, `rgba(${r},${g},${b},${a * 0.5})`);
+    ig.addColorStop(1, 'transparent');
+    ctx.fillStyle = ig;
+    ctx.fillRect(this.x - isz, this.y - isz, isz * 2, isz * 2);
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size * 0.5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${r},${g},${b},${a * 0.9})`;
+    ctx.fill();
+    if (this.brightness > 0.3) {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size * 0.25, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,230,${a * 0.6})`;
+      ctx.fill();
+    }
+  }
+}
+
+for (let i = 0; i < 80; i++) fireflies.push(new Firefly());
+
+function animate() {
+  time++;
+  ctx.fillStyle = 'rgba(10,10,15,0.3)';
+  ctx.fillRect(0, 0, w, h);
+  fireflies.forEach(f => { f.update(); f.draw(); });
+  requestAnimationFrame(animate);
+}
+animate();
+
+// ============ NAV SCROLL ============
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('main-nav');
+  if (window.scrollY > 100) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+// ============ INIT ============
+loadDraft();
+reconcileOrder();
+render();
+</script>
+
+</body>
+</html>
