@@ -482,11 +482,11 @@ main {
 }
 
 .topic-name {
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.25em;
-  color: var(--accent);
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
 }
 
 .topic-rule {
@@ -523,7 +523,7 @@ main {
   font-family: var(--serif);
   font-size: 1.7rem;
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--spark-gold);
   line-height: 1.15;
 }
 
@@ -669,11 +669,48 @@ main {
   border: 1px solid var(--border-faint);
   background: var(--card-bg);
   padding: 1.4rem 1.6rem;
-  transition: border-color 0.3s, background 0.3s;
+  transition: border-color 0.3s, background 0.3s, opacity 0.2s, transform 0.2s;
+  cursor: grab;
+  user-select: none;
 }
 
 .order-row:hover {
   border-color: var(--border-hover);
+}
+
+.order-row:active {
+  cursor: grabbing;
+}
+
+.order-row.dragging {
+  opacity: 0.4;
+  border-color: var(--spark-gold);
+}
+
+.order-row.drop-target-above {
+  border-top: 2px solid var(--spark-gold);
+}
+
+.order-row.drop-target-below {
+  border-bottom: 2px solid var(--spark-gold);
+}
+
+.order-handle {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  line-height: 1;
+  letter-spacing: -0.1em;
+  transition: color 0.25s;
+  padding-right: 0.4rem;
+}
+
+.order-row:hover .order-handle {
+  color: var(--spark-gold);
 }
 
 .order-position {
@@ -717,7 +754,7 @@ main {
   font-family: var(--serif);
   font-size: 1.4rem;
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--spark-gold);
   line-height: 1.2;
 }
 
@@ -762,6 +799,43 @@ main {
 .order-btn:disabled {
   opacity: 0.2;
   cursor: not-allowed;
+}
+
+.order-hint {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.order-hint-icon {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 0.8rem;
+}
+
+/* On mobile/touch devices, drag-and-drop doesn't work natively.
+   Show the up/down arrow controls instead. */
+.order-controls { display: none; }
+
+@media (hover: none), (max-width: 700px) {
+  .order-row { cursor: default; }
+  .order-row:active { cursor: default; }
+  .order-handle { display: none; }
+  .order-controls { display: flex; }
+  .order-hint .desktop-only { display: none; }
+  .order-hint .mobile-only { display: inline; }
+}
+
+@media (hover: hover) and (min-width: 701px) {
+  .order-controls { display: none !important; }
+  .order-hint .desktop-only { display: inline; }
+  .order-hint .mobile-only { display: none; }
 }
 
 /* ============ BUTTONS ============ */
@@ -1361,7 +1435,6 @@ function unitCard(unit, checked, disabled, onToggle, expanded, onExpand) {
       el('span', { class: 'unit-glyph' }, glyph),
       el('h3', { class: 'unit-title' }, unit.title)
     ),
-    el('p', { class: 'unit-descriptor' }, unit.descriptor),
     el('p', { class: 'unit-summary' }, unit.summary),
     el('button', { class: 'unit-toggle', onclick: onExpand },
       el('span', { style: 'font-size: 0.7rem;' }, expanded ? '−' : '+'),
@@ -1378,8 +1451,12 @@ function unitCard(unit, checked, disabled, onToggle, expanded, onExpand) {
   );
 }
 
-function orderRow(unit, position, total, onUp, onDown) {
-  return el('div', { class: 'order-row' },
+function orderRow(unit, position, total, index, onUp, onDown, onReorder) {
+  const row = el('div', {
+    class: 'order-row',
+    draggable: 'true'
+  },
+    el('div', { class: 'order-handle', title: 'Drag to reorder' }, '⋮⋮'),
     el('div', { class: 'order-position' },
       el('span', { class: 'order-position-tag' }, 'Module'),
       el('span', { class: 'order-position-num' }, String(position))
@@ -1393,6 +1470,48 @@ function orderRow(unit, position, total, onUp, onDown) {
       el('button', { class: 'order-btn', disabled: position === total, onclick: onDown, title: 'Move down' }, '▼')
     )
   );
+
+  row.dataset.index = String(index);
+
+  row.addEventListener('dragstart', (e) => {
+    row.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', String(index));
+  });
+
+  row.addEventListener('dragend', () => {
+    row.classList.remove('dragging');
+    document.querySelectorAll('.order-row').forEach(r => {
+      r.classList.remove('drop-target-above', 'drop-target-below');
+    });
+  });
+
+  row.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    const rect = row.getBoundingClientRect();
+    const midpoint = rect.top + rect.height / 2;
+    row.classList.remove('drop-target-above', 'drop-target-below');
+    if (e.clientY < midpoint) row.classList.add('drop-target-above');
+    else row.classList.add('drop-target-below');
+  });
+
+  row.addEventListener('dragleave', () => {
+    row.classList.remove('drop-target-above', 'drop-target-below');
+  });
+
+  row.addEventListener('drop', (e) => {
+    e.preventDefault();
+    const fromIdx = parseInt(e.dataTransfer.getData('text/plain'), 10);
+    const toIdx = parseInt(row.dataset.index, 10);
+    if (Number.isNaN(fromIdx) || Number.isNaN(toIdx) || fromIdx === toIdx) return;
+    const rect = row.getBoundingClientRect();
+    const midpoint = rect.top + rect.height / 2;
+    const dropAbove = e.clientY < midpoint;
+    onReorder(fromIdx, toIdx, dropAbove);
+  });
+
+  return row;
 }
 
 // =============================================================================
@@ -1563,11 +1682,27 @@ function renderStep3() {
   // Make sure unitOrder is in sync (defensive)
   reconcileOrder();
 
+  // Handler for drag-drop reordering: move item from `fromIdx` to a position
+  // adjacent to `toIdx`. If `dropAbove` is true, the item is placed before
+  // the target; otherwise after.
+  const reorder = (fromIdx, toIdx, dropAbove) => {
+    const arr = [...state.unitOrder];
+    const [moved] = arr.splice(fromIdx, 1);
+    // After the splice, indices >= fromIdx have shifted down by 1
+    let insertAt = toIdx;
+    if (fromIdx < toIdx) insertAt = toIdx - 1;
+    if (!dropAbove) insertAt += 1;
+    arr.splice(insertAt, 0, moved);
+    state.unitOrder = arr;
+    saveDraft();
+    render();
+  };
+
   const list = el('div', { class: 'order-list' });
   state.unitOrder.forEach((id, idx) => {
     const u = UNITS.find(x => x.id === id);
     if (!u) return;
-    list.appendChild(orderRow(u, idx + 1, state.unitOrder.length,
+    list.appendChild(orderRow(u, idx + 1, state.unitOrder.length, idx,
       () => {
         if (idx === 0) return;
         const arr = [...state.unitOrder];
@@ -1583,14 +1718,20 @@ function renderStep3() {
         state.unitOrder = arr;
         saveDraft();
         render();
-      }
+      },
+      reorder
     ));
   });
 
   return el('section', { class: 'step-section' },
     el('div', { class: 'section-label' }, 'Step Three · Order Modules'),
     el('h2', { class: 'step-h2', html: 'Set the <em>order</em> of your modules.' }),
-    el('p', { class: 'step-desc' }, 'Use the arrows to arrange your four modules in the order they will be taught. The first module begins in Week 2 and the fourth ends in Week 13.'),
+    el('p', { class: 'step-desc' }, 'Arrange your four modules in the order they will be taught. The first module begins in Week 2 and the fourth ends in Week 13.'),
+    el('div', { class: 'order-hint' },
+      el('span', { class: 'order-hint-icon' }, '⋮⋮'),
+      el('span', { class: 'desktop-only' }, 'Drag any row to reorder'),
+      el('span', { class: 'mobile-only' }, 'Use the arrows to reorder')
+    ),
     list,
     el('div', { class: 'btn-row' },
       el('button', { class: 'btn btn-small', onclick: () => { state.step = 2; saveDraft(); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }, '← Back'),
