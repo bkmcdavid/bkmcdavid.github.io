@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <title>Brennan McDavid</title>
   <link rel="stylesheet" href="css/style.css">
   <!-- Google tag (gtag.js) for GA4 -->
@@ -16,44 +18,49 @@
   </script>
 </head>
 <body>
-  <div class="container">
-    <nav class="sidebar-nav">
-      <div class="sidebar-content">
-        <div class="sidebar-name">
-          <a href="/" style="text-decoration: none; color: inherit;">Brennan McDavid</a>
-        </div>
-        <div class="sidebar-links">
-          <a href="/research/">Research</a>
-          <a href="/teaching/">Teaching</a>
-          <a href="/wine/">Wine</a>
-          <a href="/pdfs/CV.pdf" target="_blank" rel="noopener">CV</a>
+  <nav class="site-nav">
+    <div class="site-nav-inner">
+      <a href="/" class="site-brand">Brennan McDavid</a>
+      <div class="site-links">
+        <a href="/research/">Research</a>
+        <a href="/teaching/">Teaching</a>
+        <a href="/wine/">Wine</a>
+        <a href="/pdfs/CV.pdf" target="_blank" rel="noopener">CV</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <h1 class="hero-heading">Brennan McDavid</h1>
+        <div class="hero-body">
+          <p>I am an assistant professor of philosophy at Chapman University and a member of the <a href="https://www.chapman.edu/research/institutes-and-centers/smith-institute-for-political-economy-and-philosophy/index.aspx">Smith Institute for Political Economy and Philosophy</a>. I ask a lot of questions about values, organization, productivity, and the good life. I focus principally on Ancient Greece with these questions, and particularly on Plato and Aristotle.</p>
+          <p>In January 2027 I will join the <a href="https://hamilton.ufl.edu/">Hamilton School</a> at the University of Florida as an assistant professor.</p>
         </div>
       </div>
-    </nav>
-    <main>
-      <div class="homepage-container">
-        <div class="intro-areas-container">
-          <div class="intro-box">
-            <div class="intro-image">
-              <img src="img/McDavidheadshot.jpg" alt="Brennan McDavid">
-            </div>
-            <div class="intro-desc" style="text-align: left; font-size: 1rem;">
-              <p>
-                I am an assistant professor of philosophy at Chapman University and a member of the
-                <a href="https://www.chapman.edu/research/institutes-and-centers/smith-institute-for-political-economy-and-philosophy/index.aspx">Smith Institute for Political Economy and Philosophy</a>.
-                I ask a lot of questions about values, organization, productivity, and the good life. I focus principally on Ancient Greece with these questions, and particularly on Plato and Aristotle.
-              </p>
-              <p>
-                I am organizing the 2026 meeting of the <a href="https://westcoastplatoworkshop.com/meeting2026.html#meeting2026">West Coast Plato Workshop</a>. Please submit your work on <em>Republic</em> VIII and IX!
-              </p>
-              <p>
-                You can contact me at mcdavid at chapman dot edu.
-              </p>
-            </div>
-          </div>
-        </div>
+      <div class="hero-photo-frame">
+        <img src="img/McDavidheadshot.jpg" alt="Brennan McDavid" class="hero-photo">
+        <div class="hero-photo-rule" aria-hidden="true"></div>
       </div>
-    </main>
-  </div>
+    </section>
+
+    <aside class="hero-feature">
+      <div class="hero-feature-text">
+        <span class="hero-feature-label">Organizing</span>
+        The 2026 meeting of the <a href="https://westcoastplatoworkshop.com/meeting2026.html">West Coast Plato Workshop</a>, on <em>Republic</em> VIII and IX.
+      </div>
+      <a href="https://westcoastplatoworkshop.com/meeting2026.html" class="hero-feature-cta">Details</a>
+    </aside>
+
+    <div class="contact-line">
+      bmcdavid <span class="sep">at</span> gmail <span class="sep">dot</span> com
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div>&copy; Brennan McDavid</div>
+    <div>Chapman University Smith Institute for Political Economy and Philosophy</div>
+  </footer>
 </body>
 </html>

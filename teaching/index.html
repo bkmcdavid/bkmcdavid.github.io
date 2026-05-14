@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <title>Teaching | Brennan McDavid</title>
   <link rel="stylesheet" href="../css/style.css">
   <!-- Google tag (gtag.js) for GA4 -->
@@ -16,84 +18,72 @@
   </script>
 </head>
 <body>
-  <div class="container">
-    <nav class="sidebar-nav">
-      <div class="sidebar-content">
-        <div class="sidebar-name">
-          <a href="/" style="text-decoration: none; color: inherit;">Brennan McDavid</a>
-        </div>
-        <div class="sidebar-links">
-          <a href="/research/">Research</a>
-          <a href="/teaching/">Teaching</a>
-          <a href="/wine/">Wine</a>
-          <a href="/pdfs/CV.pdf" target="_blank" rel="noopener">CV</a>
-        </div>
+  <nav class="site-nav">
+    <div class="site-nav-inner">
+      <a href="/" class="site-brand">Brennan McDavid</a>
+      <div class="site-links">
+        <a href="/research/">Research</a>
+        <a href="/teaching/" class="active">Teaching</a>
+        <a href="/wine/">Wine</a>
+        <a href="/pdfs/CV.pdf" target="_blank" rel="noopener">CV</a>
       </div>
-    </nav>
-    <main>
-      <div class="research-areas-container">
-        <!-- From Socrates to Aquinas -->
-        <div class="research-box">
-            <div class="research-image" style="background-image: url('/img/Socrates.png');">
-            <div class="research-title">From Socrates to Aquinas</div>
-            </div>
-            <div class="research-desc">
-            <span>
-                This course is the bread and butter of my teaching. It is required for all philosophy majors and serves as their introduction to the ideas and methods of ancient philosophy. In most iterations, I build the course around the concept of a first principle, showing (a la Aristotle) that the pre-Socratics introduced the framework and that it was perfected later. I vary texts and course structure frequently.
-                <br><br>
-                <a href="/pdfs/Phil310.pdf" target="_blank">Syllabus</a>
-            </span>
-            </div>
-        </div>
+    </div>
+  </nav>
 
-        <!-- Bootcamp in Aristotle -->
-        <div class="research-box">
-            <div class="research-image" style="background-image: url('/img/giantoctopus.jpg');">
-            <div class="research-title">Bootcamp in Aristotle</div>
-            </div>
-            <div class="research-desc">
-            <span>
-                Aristotle's corpus is simultaneously impossible and imperative: impossible to read independently and yet necessary to know. This course is a rigorous initiation to his conceptual toolkit (the texts of the so-called <i>Organon</i> are taught), his four causes (<i>Physics</i>), and some significant upshot of those foundational ideas. In some years, the <i>Metaphysics</i> is taught as the upshot, in others it is the <i>Nicomachean Ethics</i> or the biological works (<i>Parts of Animals</i> and <i>Generation of Animals</i>). 
-                <br><br>
-                <a href="/pdfs/Phil360syllabus.pdf" target="_blank">Syllabus</a>
-            </span>
-            </div>
-        </div>
-
-        <!-- Dangerous Ideas -->
-        <div class="research-box">
-            <div class="research-image" style="background-image: url('/img/guernica.jpg');">
-            <div class="research-title">Dangerous Ideas</div>
-            </div>
-            <div class="research-desc">
-            <span>
-                The widely recognized crisis in civic discourse begins with bad habits and can be laid to rest only with habit revision. This course aspires to initiate good habits in argument assessment, data evaluation, and respectful disagreement in the first semester of Freshman year. We cover four "dangerous" topics in three-week units. In the first run of the course (Fall 2024), we covered arguments that meritocracy is a myth, that some versions of colonization are good, that America needs less democracy, and that the sex binary should determine transgender sports participation. 
-                <br><br>
-                <a href="/pdfs/DangerousIdeasSyllabusFall2024.pdf" target="_blank">Syllabus</a>
-            </span>
-            </div>
-        </div>
-
-        <!-- Topics in Humanomics -->
-        <div class="research-box">
-            <div class="research-image" style="background-image: url('/img/olivegrove.jpg');">
-            <div class="research-title">Topics in Humanomics</div>
-            </div>
-            <div class="research-desc">
-            <span>
-                Humanomics courses are premised on the idea that social science and the humanities are not locked in a zero-sum competition, but can instead be combined in classrooms and inquiries to yield something greater than their separate parts alone. All Humanomics courses are taught by two professors from separate disciplines who run every class session together. It is the only meaningfully interdisciplinary teaching I have ever had the privilege to do. 
-                <br>
-                <ul style="margin-top:0.5em;">
-                  <li><a href="/pdfs/357syllabus.Updated.05.04.20.pdf" target="_blank">"Trust in Troubling Times,"</a> with Jan Osborn (English)</li>
-                  <li><a href="/pdfs/357syllabusShame.pdf" target="_blank">"Shame: The Civilizing Emotion,"</a> with Erin Crockett (Economics)</li>
-                  <li><a href="/pdfs/2023HumanomicsProgress.pdf" target="_blank">"What is Progress?,"</a>with Erik Kimbrough (Economics) in 2023 and Dillon Tauzin (Economics) in 2024</li>
-                  <li>"What is Competition?," upcoming with Erik Kimbrough (Economics)</li>
-                </ul>
-            </span>
-            </div>
-        </div>
+  <main>
+    <!-- From Socrates to Aquinas -->
+    <article class="section-block">
+      <div class="section-image"><img src="/img/Socrates.png" alt="">
+        <div class="section-image-caption">From Socrates to Aquinas</div>
       </div>
-    </main>
-  </div>
+      <div class="section-body">
+        <p>This course is the bread and butter of my teaching. It is required for all philosophy majors and serves as their introduction to the ideas and methods of ancient philosophy. In most iterations, I build the course around the concept of a first principle, showing (a la Aristotle) that the pre-Socratics introduced the framework and that it was perfected later. I vary texts and course structure frequently.</p>
+        <a href="/pdfs/Phil310.pdf" target="_blank" class="syllabus-link">Syllabus</a>
+      </div>
+    </article>
+
+    <!-- Bootcamp in Aristotle -->
+    <article class="section-block">
+      <div class="section-image"><img src="/img/giantoctopus.jpg" alt="">
+        <div class="section-image-caption">Bootcamp in Aristotle</div>
+      </div>
+      <div class="section-body">
+        <p>Aristotle's corpus is simultaneously impossible and imperative: impossible to read independently and yet necessary to know. This course is a rigorous initiation to his conceptual toolkit (the texts of the so-called <i>Organon</i> are taught), his four causes (<i>Physics</i>), and some significant upshot of those foundational ideas. In some years, the <i>Metaphysics</i> is taught as the upshot, in others it is the <i>Nicomachean Ethics</i> or the biological works (<i>Parts of Animals</i> and <i>Generation of Animals</i>).</p>
+        <a href="/pdfs/Phil360syllabus.pdf" target="_blank" class="syllabus-link">Syllabus</a>
+      </div>
+    </article>
+
+    <!-- Dangerous Ideas -->
+    <article class="section-block">
+      <div class="section-image"><img src="/img/guernica.jpg" alt="">
+        <div class="section-image-caption">Dangerous Ideas</div>
+      </div>
+      <div class="section-body">
+        <p>The widely recognized crisis in civic discourse begins with bad habits and can be laid to rest only with habit revision. This course aspires to initiate good habits in argument assessment, data evaluation, and respectful disagreement in the first semester of Freshman year. We cover four "dangerous" topics in three-week units. In the first run of the course (Fall 2024), we covered arguments that meritocracy is a myth, that some versions of colonization are good, that America needs less democracy, and that the sex binary should determine transgender sports participation.</p>
+        <a href="/pdfs/DangerousIdeasSyllabusFall2024.pdf" target="_blank" class="syllabus-link">Syllabus</a>
+      </div>
+    </article>
+
+    <!-- Topics in Humanomics -->
+    <article class="section-block">
+      <div class="section-image"><img src="/img/olivegrove.jpg" alt="">
+        <div class="section-image-caption">Topics in Humanomics</div>
+      </div>
+      <div class="section-body">
+        <p>Humanomics courses are premised on the idea that social science and the humanities are not locked in a zero-sum competition, but can instead be combined in classrooms and inquiries to yield something greater than their separate parts alone. All Humanomics courses are taught by two professors from separate disciplines who run every class session together. It is the only meaningfully interdisciplinary teaching I have ever had the privilege to do.</p>
+        <ul class="course-list">
+          <li><a href="/pdfs/357syllabus.Updated.05.04.20.pdf" target="_blank">"Trust in Troubling Times,"</a> with Jan Osborn (English)</li>
+          <li><a href="/pdfs/357syllabusShame.pdf" target="_blank">"Shame: The Civilizing Emotion,"</a> with Erin Crockett (Economics)</li>
+          <li><a href="/pdfs/2023HumanomicsProgress.pdf" target="_blank">"What is Progress?,"</a> with Erik Kimbrough (Economics) in 2023 and Dillon Tauzin (Economics) in 2024</li>
+          <li>"What is Competition?," upcoming with Erik Kimbrough (Economics)</li>
+        </ul>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div>&copy; Brennan McDavid</div>
+    <div>Chapman University Smith Institute for Political Economy and Philosophy</div>
+  </footer>
 </body>
-</html
+</html>
