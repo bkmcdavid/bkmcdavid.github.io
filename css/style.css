@@ -456,8 +456,8 @@ main {
 
 .upcoming {
   max-width: var(--wide-max);
-  margin-top: 3rem;
-  padding-top: 2.5rem;
+  margin-top: 1rem;
+  padding-top: 1.5rem;
   border-top: 0.5px solid var(--rule);
 }
 
