@@ -78,9 +78,9 @@ em, i { font-style: italic; }
 
 .site-brand {
   font-family: var(--font-body);
-  font-size: 0.95rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
   color: var(--ink);
 }
 
@@ -164,9 +164,11 @@ main {
   border-bottom-color: var(--ink);
 }
 
+.hero-body .sep { color: var(--olive); margin: 0 0.15em; }
+
 .hero-photo-frame {
   position: relative;
-  max-width: 510px;
+  max-width: 380px;
   justify-self: end;
 }
 
@@ -192,6 +194,8 @@ main {
 }
 
 /* ---------- Hero feature card (workshop) ---------- */
+/* Note: this rule is unused on the current homepage (workshop callout removed),
+   but kept in case it's wanted again. */
 
 .hero-feature {
   max-width: var(--wide-max);
@@ -246,6 +250,7 @@ main {
 }
 
 /* ---------- Contact line ---------- */
+/* Note: unused on current homepage (contact moved into bio prose), kept for safety. */
 
 .contact-line {
   max-width: var(--wide-max);
@@ -270,7 +275,7 @@ main {
 
 .section-image {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 24 / 7;
   margin-bottom: 1.8rem;
   position: relative;
   overflow: hidden;
@@ -536,7 +541,7 @@ main {
     padding-bottom: 1rem;
   }
 
-  .site-brand { font-size: 1.25rem; }
+  .site-brand { font-size: 1.35rem; }
 
   .site-links {
     gap: 1.4rem;
@@ -561,14 +566,14 @@ main {
   .hero-heading { font-size: 2.2rem; }
 
   .hero-photo-frame {
-    max-width: 360px;
+    max-width: 280px;
     justify-self: center;
     order: -1;
   }
 
   .hero-photo-rule {
-    bottom: -12px;
-    right: -12px;
+    bottom: -10px;
+    right: -10px;
   }
 
   .hero-feature {
@@ -581,9 +586,7 @@ main {
     justify-self: start;
   }
 
-
-
-  .section-image { aspect-ratio: 3 / 2; }
+  .section-image { aspect-ratio: 3 / 1; }
   .section-image-caption { font-size: 0.95rem; padding: 0.45rem 0.9rem; }
   .section-title { font-size: 1.5rem; }
 
