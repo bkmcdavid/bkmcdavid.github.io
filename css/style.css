@@ -1,7 +1,7 @@
 /* =========================================================
    Brennan McDavid — site styles
    Hybrid direction: top horizontal nav, hero layout,
-   restrained typography, Athena-olive accent.
+   restrained typography, cool teal + sage accents.
    ========================================================= */
 
 :root {
@@ -13,9 +13,11 @@
   --ink-mute:      #8a8a82;   /* tertiary text, captions */
   --rule:          #d8d3c2;   /* hairline rule color */
   --rule-strong:   #b6b09a;   /* stronger rule */
-  --olive:         #6b7a3f;   /* primary accent (Athena olive) */
-  --olive-deep:    #5a6b3a;   /* darker accent for hover */
-  --olive-soft:    #b8b89a;   /* desaturated olive for borders */
+  --olive:         #4a6770;   /* primary accent (cool teal) */
+  --olive-deep:    #3a525a;   /* darker teal for hover */
+  --olive-soft:    #aab4b8;   /* desaturated teal for borders */
+  --sage:          #8e9479;   /* sage from shirt — softer secondary accent */
+  --sage-deep:     #6e7459;   /* darker sage for hover/contrast */
 
   /* Typography */
   --font-display: "EB Garamond", "Cormorant Garamond", Georgia, serif;
@@ -75,26 +77,14 @@ em, i { font-style: italic; }
 }
 
 .site-brand {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
   font-weight: 500;
-  letter-spacing: -0.005em;
+  letter-spacing: 0.02em;
   color: var(--ink);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
 }
 
-.site-brand::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--olive);
-}
-
-.site-brand:hover { color: var(--ink); }
+.site-brand:hover { color: var(--olive-deep); }
 
 .site-links {
   display: flex;
@@ -134,7 +124,7 @@ main {
 
 .hero {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: 1fr 1.1fr;
   gap: 4rem;
   align-items: center;
   padding: 1rem 0 4rem 0;
@@ -176,7 +166,7 @@ main {
 
 .hero-photo-frame {
   position: relative;
-  max-width: 340px;
+  max-width: 510px;
   justify-self: end;
 }
 
@@ -192,11 +182,11 @@ main {
 
 .hero-photo-rule {
   position: absolute;
-  bottom: -14px;
-  right: -14px;
+  bottom: -16px;
+  right: -16px;
   width: 100%;
   height: 100%;
-  border: 1px solid var(--olive);
+  border: 1px solid var(--sage);
   z-index: 1;
   pointer-events: none;
 }
@@ -457,30 +447,77 @@ main {
   margin-right: 0.6rem;
 }
 
-/* ---------- Footer ---------- */
+/* ---------- Upcoming talks & activities (homepage) ---------- */
 
-.site-footer {
+.upcoming {
   max-width: var(--wide-max);
-  margin: 5rem auto 0 auto;
-  padding: 2rem 2.5rem 3rem 2.5rem;
+  margin-top: 3rem;
+  padding-top: 2.5rem;
   border-top: 0.5px solid var(--rule);
+}
+
+.upcoming-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  margin: 0 0 1.5rem 0;
+  color: var(--ink);
+}
+
+.upcoming-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.upcoming-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 0.5px solid var(--rule);
+  align-items: baseline;
+}
+
+.upcoming-item:first-child {
+  padding-top: 0;
+}
+
+.upcoming-item:last-child {
+  border-bottom: none;
+}
+
+.upcoming-date {
   font-size: 0.78rem;
-  color: var(--ink-mute);
-  letter-spacing: 0.02em;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sage-deep);
+  font-weight: 500;
 }
 
-.site-footer a {
-  color: var(--ink-mute);
-  border-bottom: 0.5px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
+.upcoming-content {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
 }
 
-.site-footer a:hover {
+.upcoming-content a {
   color: var(--olive-deep);
-  border-bottom-color: var(--olive-soft);
+  border-bottom: 0.5px solid var(--olive-soft);
+  padding-bottom: 1px;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.upcoming-content a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+.upcoming-empty {
+  font-size: 0.95rem;
+  color: var(--ink-mute);
+  font-style: italic;
 }
 
 /* =========================================================
@@ -524,14 +561,14 @@ main {
   .hero-heading { font-size: 2.2rem; }
 
   .hero-photo-frame {
-    max-width: 280px;
+    max-width: 360px;
     justify-self: center;
     order: -1;
   }
 
   .hero-photo-rule {
-    bottom: -10px;
-    right: -10px;
+    bottom: -12px;
+    right: -12px;
   }
 
   .hero-feature {
@@ -552,10 +589,12 @@ main {
 
   .travel-list { columns: 1; }
 
-  .site-footer {
-    flex-direction: column;
-    gap: 0.6rem;
-    text-align: center;
-    padding: 1.5rem 1.25rem 2.5rem 1.25rem;
+  .upcoming-item {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .upcoming-date {
+    font-size: 0.72rem;
   }
 }
