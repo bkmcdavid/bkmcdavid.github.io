@@ -53,14 +53,69 @@
       <a href="https://westcoastplatoworkshop.com/meeting2026.html" class="hero-feature-cta">Details</a>
     </aside>
 
+    <section class="upcoming" id="upcoming">
+      <h2 class="upcoming-title">Upcoming talks and activities</h2>
+      <ul class="upcoming-list">
+        <!-- data-end is the last date of the event in YYYY-MM-DD format.
+             Events disappear from the page one week after data-end. -->
+        <li class="upcoming-item" data-end="2026-05-22">
+          <div class="upcoming-date">May 18&ndash;22, 2026</div>
+          <div class="upcoming-content">
+            Participant, <a href="https://cfau.aei.org/program/conservative-intellectual-tradition-for-university-faculty/">AEI Faculty Workshop on the Conservative Intellectual Tradition</a>. Washington, D.C.
+          </div>
+        </li>
+        <li class="upcoming-item" data-end="2026-06-19">
+          <div class="upcoming-date">June 19, 2026</div>
+          <div class="upcoming-content">
+            Online talk, &ldquo;Nature and Nurture in the Noble Lie,&rdquo; for the <a href="https://phusiskaiphuta.wordpress.com/">Phusis kai Phuta</a> project.
+          </div>
+        </li>
+        <li class="upcoming-item" data-end="2026-07-08">
+          <div class="upcoming-date">June 10 &ndash; July 8, 2026</div>
+          <div class="upcoming-content">
+            Summer Fellowship, <a href="https://chs.harvard.edu/">Center for Hellenic Studies</a>, Harvard University. Washington, D.C.
+          </div>
+        </li>
+      </ul>
+      <div class="upcoming-empty" hidden>No upcoming talks scheduled.</div>
+    </section>
+
     <div class="contact-line">
       bmcdavid <span class="sep">at</span> gmail <span class="sep">dot</span> com
     </div>
   </main>
 
-  <footer class="site-footer">
-    <div>&copy; Brennan McDavid</div>
-    <div>Chapman University Smith Institute for Political Economy and Philosophy</div>
-  </footer>
+  <script>
+    // Auto-hide past events: an event disappears 7 days after its data-end date.
+    (function() {
+      var list = document.querySelector('.upcoming-list');
+      var emptyMsg = document.querySelector('.upcoming-empty');
+      if (!list) return;
+      var now = new Date();
+      // Set to start of day to avoid timezone edge effects
+      now.setHours(0, 0, 0, 0);
+      var items = list.querySelectorAll('.upcoming-item');
+      var visibleCount = 0;
+      items.forEach(function(item) {
+        var endStr = item.getAttribute('data-end');
+        if (!endStr) { visibleCount++; return; }
+        // Parse YYYY-MM-DD as local date (not UTC) to match user's timezone
+        var parts = endStr.split('-');
+        var endDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+        // Add 7 days to end date
+        var hideAfter = new Date(endDate);
+        hideAfter.setDate(hideAfter.getDate() + 7);
+        if (now > hideAfter) {
+          item.style.display = 'none';
+        } else {
+          visibleCount++;
+        }
+      });
+      if (visibleCount === 0 && emptyMsg) {
+        emptyMsg.hidden = false;
+        list.style.display = 'none';
+      }
+    })();
+  </script>
 </body>
 </html>
