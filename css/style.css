@@ -384,6 +384,41 @@ main {
   border-bottom-color: var(--olive-deep);
 }
 
+/* Abstract toggle */
+.papers-list .abstract-toggle {
+  display: inline-block;
+  margin-left: 0.4rem;
+  color: var(--olive-deep);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 0.5px solid var(--olive-soft);
+  padding-bottom: 1px;
+  text-decoration: none;
+}
+
+.papers-list .abstract-toggle:hover {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+.papers-list .paper-abstract {
+  display: none;
+  margin-top: 0.8rem;
+  padding: 0.9rem 1rem;
+  background: var(--bg-subtle);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  border-left: 2px solid var(--sage);
+}
+
+.papers-list .paper-abstract.open {
+  display: block;
+}
+
 /* Inline syllabus link on teaching page */
 .syllabus-link {
   display: inline-block;
